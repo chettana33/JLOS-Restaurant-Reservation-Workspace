@@ -121,3 +121,15 @@ Daily engineering journal.
 - เพิ่ม Image Placeholder โดยไม่มี Upload หรือ Persistence
 - รองรับ Keyboard, Focus State และ Responsive Layout สำหรับ Desktop, Tablet และ Mobile
 - ไม่มี Local Storage, Save Persistence, PDF, AI Package, Duplicate, Delete, Backend หรือ Cloud Sync
+
+## 2026-07-13 — TASK-007 completed
+
+- สถานะ: **Completed**
+- ปรับ Output Preview เป็น Restaurant Reservation Summary สำหรับลูกค้าแบบ Live
+- อ่าน Project และ Selected Reservation Item ผ่าน Central State API เท่านั้น
+- Sync การเลือกและการแก้ Reservation Details ผ่าน State Subscription โดยตรง
+- แสดงข้อมูลโครงการ การจอง Guest Total ผู้ติดต่อ Location Link เมนู หมายเหตุ และ Image Area
+- เพิ่ม Customer-friendly Placeholders โดยไม่แสดง `undefined`, `null`, URL ว่าง หรือ Physical Address
+- รักษา A4 Landscape Ratio และให้เนื้อหาพอดีหนึ่งหน้าใน Desktop, Tablet และ Mobile
+- เพิ่ม Print CSS ให้พิมพ์เฉพาะ Output Preview Paper
+- ไม่มี PDF Generation, Download, Local Storage, Toolbar Actions, Save, Duplicate, Delete, AI Package, Backend หรือ Cloud Sync

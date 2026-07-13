@@ -24,10 +24,10 @@ chettana33/JLOS-Restaurant-Reservation-Workspace
 - TASK-004 Reservation Timeline Component
 - TASK-005 Single Source of Truth State Management
 - TASK-006 Editable Reservation Details
+- TASK-007 Live Output Preview
 
 ## Next
 
-- TASK-007 Output Preview
 - TASK-008 Toolbar Actions
 - TASK-009 Local Storage
 - TASK-010 PDF Export
@@ -35,11 +35,11 @@ chettana33/JLOS-Restaurant-Reservation-Workspace
 
 ## Current Progress
 
-60%
+70%
 
 ## Current Branch
 
-feature/task-006
+feature/task-007
 
 ## Status
 

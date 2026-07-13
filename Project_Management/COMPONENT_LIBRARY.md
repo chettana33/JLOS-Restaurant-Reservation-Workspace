@@ -53,9 +53,15 @@ Displays workspace actions. TASK-003 does not add action behavior.
 
 ### Output Preview
 
+- Status: Implemented in TASK-007
 - Displays exactly one selected Reservation Item
 - Uses one reusable A4 Landscape document structure for screen preview and future PDF export
-- Does not implement PDF generation in TASK-003
+- Displays Project context, reservation schedule, restaurant, status, confirmation, guest total, supplier contact, Location Link, menu, notes, and image area
+- Uses customer-friendly placeholders without fabricating reservation data
+- Renders an accessible Open Location action only for valid HTTP/HTTPS links
+- Uses an accessible image fallback when the selected image is unavailable
+- Prepares print CSS to show only the A4 paper
+- Does not implement PDF generation or download behavior
 - Subscribes to central state and derives the same current item as Reservation Details
 - Reflects valid Reservation Details edits immediately through its state subscription
 
