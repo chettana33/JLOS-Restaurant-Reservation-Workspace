@@ -148,6 +148,7 @@ export function updateReservationItem(id, changes) {
     ...state.reservationItems[itemIndex],
     ...clone(changes),
     id,
+    updatedAt: new Date().toISOString(),
   };
   notifySubscribers();
   return true;
