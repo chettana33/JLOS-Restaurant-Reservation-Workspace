@@ -1,0 +1,3 @@
+# RELEASE NOTE
+Highlights
+Fixes

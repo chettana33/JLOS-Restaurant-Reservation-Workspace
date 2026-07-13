@@ -1,0 +1,240 @@
+/* JLOS v4.0 Alpha — desktop-first workspace layout. */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+}
+
+body {
+  margin: 0;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+}
+
+.project-header__brand,
+.toolbar,
+.toolbar__group,
+.panel-header,
+.editor-card__header,
+.a4-preview__header,
+.a4-preview__title-row,
+.a4-preview__footer {
+  display: flex;
+  align-items: center;
+}
+
+.project-header__brand {
+  flex: 0 1 auto;
+  gap: var(--space-3);
+  min-width: 18rem;
+}
+
+.project-meta {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(5, minmax(7rem, 1fr));
+  max-width: 67rem;
+  margin: 0;
+}
+
+.toolbar {
+  gap: var(--space-3);
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-6);
+}
+
+.toolbar__group {
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.toolbar__group--end {
+  justify-content: flex-end;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 24fr) minmax(0, 38fr) minmax(0, 38fr);
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6) var(--space-6);
+}
+
+.workspace-panel {
+  min-width: 0;
+  min-height: calc(100vh - 14.5rem);
+}
+
+.workspace-panel--preview {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  justify-content: space-between;
+  min-height: 4.5rem;
+  padding: var(--space-4) var(--space-5);
+}
+
+.editor-content {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.field-display--wide {
+  grid-column: 1 / -1;
+}
+
+.guest-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.menu-summary {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-3);
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.preview-stage {
+  display: grid;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: calc(100% - 4.5rem);
+  padding: var(--space-2);
+  place-items: center;
+}
+
+.a4-preview__header,
+.a4-preview__title-row,
+.a4-preview__footer {
+  justify-content: space-between;
+}
+
+.a4-preview__body {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 4%;
+}
+
+@media (max-width: 75rem) {
+  .project-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .project-meta {
+    width: 100%;
+    max-width: none;
+  }
+
+  .workspace {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .workspace-panel {
+    min-height: 30rem;
+  }
+
+  .workspace-panel--timeline {
+    grid-column: 1 / -1;
+    min-height: auto;
+  }
+
+  .preview-stage {
+    padding: var(--space-1);
+  }
+}
+
+@media (max-width: 48rem) {
+  .project-header {
+    padding: var(--space-4);
+  }
+
+  .project-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-meta__item:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .toolbar {
+    align-items: stretch;
+    flex-direction: column;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .toolbar__group,
+  .toolbar__group--end {
+    justify-content: flex-start;
+  }
+
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--space-3) var(--space-4) var(--space-4);
+  }
+
+  .workspace-panel,
+  .workspace-panel--timeline {
+    grid-column: auto;
+    min-height: auto;
+  }
+
+  .guest-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .preview-stage {
+    min-height: 23rem;
+    padding: 0;
+  }
+}
+
+@media (max-width: 30rem) {
+  .project-meta,
+  .field-grid,
+  .menu-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .project-meta__item:last-child,
+  .field-display--wide {
+    grid-column: auto;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button {
+    flex: 1 1 calc(50% - var(--space-2));
+  }
+}

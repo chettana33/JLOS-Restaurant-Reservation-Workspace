@@ -1,0 +1,69 @@
+/* JLOS v4.0 Alpha — visual foundation and design tokens. */
+
+:root {
+  color-scheme: light;
+
+  --color-canvas: #f3f5f8;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f8f9fb;
+  --color-surface-muted: #eef1f5;
+  --color-border: #dce1e8;
+  --color-border-strong: #c8d0da;
+  --color-navy: #142033;
+  --color-navy-soft: #24344d;
+  --color-text: #1c2738;
+  --color-text-muted: #667386;
+  --color-text-faint: #8b96a6;
+  --color-accent: #b3273a;
+  --color-accent-dark: #8f1f2e;
+  --color-accent-soft: #f9e9eb;
+  --color-blue-soft: #eaf1fb;
+  --color-blue-text: #315c91;
+  --color-green-soft: #e5f4ed;
+  --color-green-text: #25694b;
+  --color-amber-soft: #fff2d8;
+  --color-amber-text: #8a5a0a;
+  --color-red-soft: #fae8e8;
+  --color-red-text: #9b3037;
+
+  --font-family-sans: Inter, "Noto Sans", "Segoe UI", Arial, sans-serif;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+
+  --shadow-sm: 0 1px 2px rgb(20 32 51 / 5%);
+  --shadow-md: 0 8px 24px rgb(20 32 51 / 8%);
+  --shadow-preview: 0 16px 40px rgb(20 32 51 / 16%);
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-text);
+  font-family: var(--font-family-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+}
+
+strong {
+  font-weight: 650;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+}

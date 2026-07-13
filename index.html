@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Japan Land Operator Suite restaurant reservation workspace">
+    <title>JLOS | Restaurant Reservation Workspace</title>
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="project-header">
+        <div class="project-header__brand">
+          <div class="brand-mark" aria-hidden="true">JL</div>
+          <div>
+            <p class="eyebrow">Japan Land Operator Suite</p>
+            <h1>Restaurant Reservation Workspace</h1>
+          </div>
+        </div>
+
+        <dl class="project-meta" aria-label="Current tour information">
+          <div class="project-meta__item">
+            <dt>Tour Code</dt>
+            <dd>JPN-2607-018</dd>
+          </div>
+          <div class="project-meta__item">
+            <dt>Customer</dt>
+            <dd>Siam Horizon Travel</dd>
+          </div>
+          <div class="project-meta__item">
+            <dt>Guide</dt>
+            <dd>Ms. Aiko Tanaka</dd>
+          </div>
+          <div class="project-meta__item">
+            <dt>Travel Date</dt>
+            <dd>18–24 Jul 2026</dd>
+          </div>
+          <div class="project-meta__item">
+            <dt>Project Status</dt>
+            <dd><span class="status-badge status-badge--working">Working</span></dd>
+          </div>
+        </dl>
+      </header>
+
+      <nav class="toolbar" aria-label="Workspace actions">
+        <div class="toolbar__group">
+          <button class="button button--primary" type="button" data-action="new-reservation">New Reservation</button>
+          <button class="button" type="button" disabled title="Available in a later task">Duplicate</button>
+          <button class="button button--danger-quiet" type="button" disabled title="Available in a later task">Delete</button>
+        </div>
+        <div class="toolbar__group toolbar__group--end">
+          <button class="button" type="button" disabled title="Available in a later task">Save</button>
+          <button class="button" type="button" disabled title="Available in a later task">AI Package</button>
+          <button class="button" type="button" disabled title="Available in a later task">Export PDF</button>
+          <button class="button button--icon-text" type="button" disabled title="Available in a later task">
+            <span aria-hidden="true">⚙</span>
+            Settings
+          </button>
+        </div>
+      </nav>
+
+      <main class="workspace" aria-label="Restaurant reservation workspace">
+        <section class="workspace-panel workspace-panel--timeline" aria-labelledby="reservation-timeline-title">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">Itinerary</p>
+              <h2 id="reservation-timeline-title">Reservation Timeline</h2>
+            </div>
+            <span id="timeline-count" class="count-pill" aria-live="polite">Loading…</span>
+          </header>
+
+          <div id="reservation-timeline" class="reservation-timeline" aria-live="polite" aria-busy="true">
+            <p class="timeline-state">Loading reservation timeline…</p>
+          </div>
+        </section>
+
+        <section class="workspace-panel workspace-panel--details" aria-labelledby="reservation-details-title">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">Selected item</p>
+              <h2 id="reservation-details-title">Reservation Details</h2>
+            </div>
+          </header>
+
+          <div id="reservation-details" class="selected-item-summary" aria-live="polite">
+            <p class="selected-item-summary__loading">Loading selected reservation…</p>
+          </div>
+        </section>
+
+        <aside class="workspace-panel workspace-panel--preview" aria-labelledby="output-preview-title">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">Selected item output</p>
+              <h2 id="output-preview-title">Output Preview</h2>
+            </div>
+            <span class="preview-format">A4 · Landscape</span>
+          </header>
+
+          <div class="preview-stage">
+            <article id="output-preview-paper" class="preview-paper output-preview-paper" aria-label="Selected reservation output preview" aria-live="polite">
+              <p class="output-preview-paper__loading">Loading output preview…</p>
+            </article>
+          </div>
+        </aside>
+      </main>
+    </div>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

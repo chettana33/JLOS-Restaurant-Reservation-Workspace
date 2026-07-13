@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jlos.local/schemas/reservation-item.schema.json",
+  "title": "JLOS Reservation Item",
+  "description": "Data contract for one restaurant Reservation Item in the JLOS v4.0 Alpha Reservation Timeline.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "dayNumber",
+    "date",
+    "itemType",
+    "meal",
+    "time",
+    "title",
+    "status",
+    "restaurantName",
+    "phone",
+    "contact",
+    "locationLink",
+    "adults",
+    "children",
+    "guides",
+    "menu",
+    "notes",
+    "image",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Stable unique identifier for the Reservation Item."
+    },
+    "dayNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "One-based itinerary day used to group the timeline."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Reservation date in ISO 8601 YYYY-MM-DD format."
+    },
+    "itemType": {
+      "type": "string",
+      "enum": ["restaurant"],
+      "description": "Module discriminator. v4.0 Alpha supports restaurant only; future values are documented separately."
+    },
+    "meal": {
+      "type": "string",
+      "enum": ["breakfast", "lunch", "dinner", "other"],
+      "description": "Meal period for the restaurant reservation."
+    },
+    "time": {
+      "type": "string",
+      "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+      "description": "Local reservation time using 24-hour HH:mm format."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Compact operator-facing label for the timeline entry."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pending",
+        "requested",
+        "confirmed",
+        "reconfirm",
+        "cancelled",
+        "completed",
+        "archived"
+      ],
+      "default": "pending",
+      "description": "Official Reservation Item workflow status."
+    },
+    "restaurantName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Official or operator-recognizable restaurant name."
+    },
+    "phone": {
+      "type": ["string", "null"],
+      "description": "Restaurant phone number. Null means not supplied."
+    },
+    "contact": {
+      "type": ["string", "null"],
+      "description": "Restaurant contact person or team. Null means not supplied."
+    },
+    "locationLink": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Google Maps or restaurant location URL. Null means not supplied. Physical address is not part of this model."
+    },
+    "adults": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of adult guests."
+    },
+    "children": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of child guests."
+    },
+    "guides": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of guides included in the reservation."
+    },
+    "menu": {
+      "type": "object",
+      "description": "Structured menu summary for the current reservation.",
+      "additionalProperties": false,
+      "required": ["name", "pricePerGuest", "currency", "items"],
+      "properties": {
+        "name": {
+          "type": ["string", "null"],
+          "description": "Menu or course name. Null means undecided."
+        },
+        "pricePerGuest": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Menu price per guest. Null means not supplied."
+        },
+        "currency": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z]{3}$",
+          "description": "ISO 4217 currency code. Null means not supplied."
+        },
+        "items": {
+          "type": "array",
+          "description": "Ordered list of included dishes or services.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Operator notes, dietary requirements, or service instructions. Empty string means no notes."
+    },
+    "image": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Primary reference image URL. Null means no image."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp in ISO 8601 date-time format."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Most recent update timestamp in ISO 8601 date-time format."
+    }
+  }
+}
