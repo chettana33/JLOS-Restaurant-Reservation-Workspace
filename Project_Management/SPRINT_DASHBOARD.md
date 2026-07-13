@@ -10,7 +10,7 @@ v4.0 Alpha
 
 ## Current Sprint
 
-Sprint 3
+Sprint 5
 
 ## Repository
 
@@ -25,21 +25,23 @@ chettana33/JLOS-Restaurant-Reservation-Workspace
 - TASK-005 Single Source of Truth State Management
 - TASK-006 Editable Reservation Details
 - TASK-007 Live Output Preview
+- TASK-008 Save and Load Project
 
 ## Next
 
-- TASK-008 Toolbar Actions
-- TASK-009 Local Storage
-- TASK-010 PDF Export
-- TASK-011 AI Package Export
+- TASK-009 Duplicate Reservation
+- TASK-010 Delete Reservation
+- TASK-011 Export PDF
+- TASK-012 Settings
+- TASK-013 AI Package Export
 
 ## Current Progress
 
-70%
+80%
 
 ## Current Branch
 
-feature/task-007
+feature/task-008
 
 ## Status
 

@@ -93,3 +93,14 @@
 - Preserved a responsive single-page A4 landscape ratio across desktop, tablet, mobile, and print preparation.
 - Added print-only CSS that hides the workspace controls and prints only the Output Preview paper.
 - Added no PDF generation, download, Local Storage, Toolbar Actions, persistence, backend, or cloud synchronization.
+
+### TASK-008 — Save and Load Project completed
+
+- Enabled Save and added Open Project beside it in the workspace Toolbar.
+- Added local JSON project downloads using the approved `4.0-alpha` document shape and filename convention.
+- Added safe JSON import with top-level, Project, Reservation Item, duplicate ID, status, and version validation.
+- Added atomic central state replacement with safe selected-item fallback and one subscriber notification.
+- Restored Header, Reservation Timeline, Reservation Details, and Output Preview through existing subscriptions.
+- Added accessible live feedback and focus return after file selection.
+- Preserved responsive Toolbar behavior without horizontal scrolling.
+- Added no Local Storage, autosave, backend, cloud sync, Duplicate, Delete, PDF, Settings, or AI Package behavior.

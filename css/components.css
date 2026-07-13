@@ -79,6 +79,23 @@
   box-shadow: var(--shadow-sm);
 }
 
+.toolbar-status {
+  min-width: 0;
+  margin: 0 var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.toolbar-status--success {
+  color: var(--color-green-text);
+}
+
+.toolbar-status--error {
+  color: var(--color-red-text);
+}
+
 .button {
   min-height: 2.25rem;
   padding: 0.5rem 0.75rem;

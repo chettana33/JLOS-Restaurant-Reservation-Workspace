@@ -4,10 +4,10 @@
 
 - Product: Restaurant Reservation Workspace
 - Version: v4.0 Alpha
-- Sprint: Sprint 4
+- Sprint: Sprint 5
 - Architecture: Generation 2
 - Current navigation model: Reservation Timeline
-- Current task: TASK-007 Live Output Preview
+- Current task: TASK-008 Save and Load Project
 
 ## Source of Truth
 
@@ -52,6 +52,15 @@
 - Format: One responsive A4 landscape Restaurant Reservation Summary
 - Print preparation: Output Preview paper only; no PDF generation
 
+## Project Files
+
+- Local JSON file module: `js/storage.js`
+- Full task specification: `Prompts/Sprint_05/TASK-008.md`
+- File version: `4.0-alpha`
+- Persisted state: `project`, `reservationItems`, and `selectedItemId`
+- State restoration: Atomic replacement through `replaceState(nextState)`
+- Local Storage, autosave, cloud sync, and backend persistence are not used
+
 ## Current Scope
 
 - Current item type: `restaurant`
@@ -59,4 +68,5 @@
 - Future item types are documentation-only until separately approved.
 - TASK-006 implements in-memory Reservation Details editing through central state subscriptions.
 - TASK-007 implements the live customer-facing Output Preview for one selected reservation.
-- Local Storage, Save persistence, PDF, AI Package, Duplicate, Delete, image persistence, backend, and cloud sync remain out of scope.
+- TASK-008 implements explicit Save and Open Project actions using local JSON files.
+- Local Storage, autosave, PDF, AI Package, Duplicate, Delete, image persistence, backend, and cloud sync remain out of scope.

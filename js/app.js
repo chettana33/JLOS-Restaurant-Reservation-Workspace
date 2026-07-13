@@ -4,7 +4,8 @@
 
 import { initializeReservationDetails } from "./editor.js";
 import { initializeOutputPreview } from "./preview.js";
-import { initializeState } from "./state.js";
+import { initializeProjectFileControls } from "./storage.js";
+import { getProject, initializeState, subscribe } from "./state.js";
 import { initializeReservationTimeline, validateTimelineData } from "./timeline.js";
 
 const INITIAL_PROJECT = Object.freeze({
@@ -15,7 +16,13 @@ const INITIAL_PROJECT = Object.freeze({
   projectStatus: "working",
 });
 
-async function loadInitialReservationItems() {
+const PROJECT_STATUS_LABELS = Object.freeze({
+  draft: "Draft",
+  working: "Working",
+  completed: "Completed",
+});
+
+async function loadInitialData() {
   try {
     const [timelineResponse, schemaResponse] = await Promise.all([
       fetch("data/sample-reservation-timeline.json"),
@@ -36,17 +43,38 @@ async function loadInitialReservationItems() {
       throw new Error(`Reservation Timeline validation failed: ${validationErrors.join(" ")}`);
     }
 
-    return timelineData.items;
+    return { reservationItems: timelineData.items, reservationItemSchema };
   } catch (error) {
     console.warn("Starting JLOS with an empty Reservation Timeline.", error);
-    return [];
+    return { reservationItems: [], reservationItemSchema: null };
   }
 }
 
-async function startApplication() {
-  const loadedItems = await loadInitialReservationItems();
+function initializeProjectSummary(container) {
+  const renderProject = () => {
+    const project = getProject();
 
-  initializeState(INITIAL_PROJECT, loadedItems);
+    ["tourCode", "customer", "guide", "travelDate"].forEach((fieldName) => {
+      const field = container.querySelector(`[data-project-field="${fieldName}"]`);
+      field.textContent = project[fieldName] || "Not set";
+    });
+
+    const status = container.querySelector('[data-project-field="projectStatus"]');
+    const statusValue = PROJECT_STATUS_LABELS[project.projectStatus] ? project.projectStatus : "working";
+    status.className = `status-badge status-badge--${statusValue}`;
+    status.textContent = PROJECT_STATUS_LABELS[statusValue];
+  };
+  const unsubscribe = subscribe(renderProject);
+
+  renderProject();
+  return unsubscribe;
+}
+
+async function startApplication() {
+  const { reservationItems, reservationItemSchema } = await loadInitialData();
+
+  initializeState(INITIAL_PROJECT, reservationItems);
+  initializeProjectSummary(document.querySelector("[data-project-summary]"));
   initializeReservationTimeline({
     container: document.querySelector("#reservation-timeline"),
     countElement: document.querySelector("#timeline-count"),
@@ -54,6 +82,13 @@ async function startApplication() {
   });
   initializeReservationDetails(document.querySelector("#reservation-details"));
   initializeOutputPreview(document.querySelector("#output-preview-paper"));
+  initializeProjectFileControls({
+    saveButton: document.querySelector('[data-action="save-project"]'),
+    openButton: document.querySelector('[data-action="open-project"]'),
+    fileInput: document.querySelector("#project-file-input"),
+    statusElement: document.querySelector("#project-file-status"),
+    reservationItemSchema,
+  });
 }
 
 startApplication();
