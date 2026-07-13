@@ -4,10 +4,10 @@
 
 - Product: Restaurant Reservation Workspace
 - Version: v4.0 Alpha
-- Sprint: Sprint 3
+- Sprint: Sprint 4
 - Architecture: Generation 2
 - Current navigation model: Reservation Timeline
-- Current task: TASK-006 Editable Reservation Details
+- Current task: TASK-007 Live Output Preview
 
 ## Source of Truth
 
@@ -43,10 +43,20 @@
 - Synchronization: Central state subscriptions update Reservation Timeline, Reservation Details, and Output Preview
 - Validation: Inline, field-specific, and non-persistent
 
+## Output Preview
+
+- Customer-facing preview module: `js/preview.js`
+- Full task specification: `Prompts/Sprint_04/TASK-007.md`
+- Data sources: `getProject()` and `getSelectedItem()` through the central State API
+- Synchronization: Direct central state subscription
+- Format: One responsive A4 landscape Restaurant Reservation Summary
+- Print preparation: Output Preview paper only; no PDF generation
+
 ## Current Scope
 
 - Current item type: `restaurant`
 - New item default status: `pending`
 - Future item types are documentation-only until separately approved.
 - TASK-006 implements in-memory Reservation Details editing through central state subscriptions.
+- TASK-007 implements the live customer-facing Output Preview for one selected reservation.
 - Local Storage, Save persistence, PDF, AI Package, Duplicate, Delete, image persistence, backend, and cloud sync remain out of scope.

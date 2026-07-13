@@ -82,3 +82,14 @@
 - Added an image placeholder without upload or persistence behavior.
 - Added responsive, keyboard-accessible controls and visible focus states.
 - Added no Local Storage, Save persistence, PDF, AI Package, Duplicate, Delete, backend, or cloud synchronization.
+
+### TASK-007 — Live Output Preview completed
+
+- Upgraded Output Preview into a live customer-facing Restaurant Reservation Summary.
+- Added Project metadata, reservation schedule, status, confirmation, guest totals, restaurant contact, Location Link, menu, notes, and image area.
+- Read Project and selected Reservation Item snapshots directly from the central State API.
+- Preserved immediate synchronization through the existing state subscription.
+- Added safe customer-facing placeholders and accessible image fallback behavior.
+- Preserved a responsive single-page A4 landscape ratio across desktop, tablet, mobile, and print preparation.
+- Added print-only CSS that hides the workspace controls and prints only the Output Preview paper.
+- Added no PDF generation, download, Local Storage, Toolbar Actions, persistence, backend, or cloud synchronization.
