@@ -42,9 +42,14 @@ Displays workspace actions. TASK-003 does not add action behavior.
 
 ### Reservation Details
 
-- Displays editor sections for the currently selected Reservation Item
+- Status: Implemented in TASK-006
+- Displays five compact sections for the currently selected Reservation Item
+- Supports editable Reservation, Restaurant, Guests, Menu & Notes fields
+- Displays an image placeholder without upload or persistence behavior
+- Provides inline validation for schedule, status, guest counts, and Location Link
 - Does not own an independent copy of reservation data
 - Subscribes to central state and derives the current item through `getSelectedItem()`
+- Dispatches approved edits through `updateReservationItem(id, changes)`
 
 ### Output Preview
 
@@ -52,6 +57,7 @@ Displays workspace actions. TASK-003 does not add action behavior.
 - Uses one reusable A4 Landscape document structure for screen preview and future PDF export
 - Does not implement PDF generation in TASK-003
 - Subscribes to central state and derives the same current item as Reservation Details
+- Reflects valid Reservation Details edits immediately through its state subscription
 
 ## Application State Service
 

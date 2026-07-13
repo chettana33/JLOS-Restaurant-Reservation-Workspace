@@ -78,6 +78,10 @@
       "default": "pending",
       "description": "Official Reservation Item workflow status."
     },
+    "confirmationNumber": {
+      "type": ["string", "null"],
+      "description": "Supplier confirmation or booking reference. Null or an empty string means not supplied."
+    },
     "restaurantName": {
       "type": "string",
       "minLength": 1,

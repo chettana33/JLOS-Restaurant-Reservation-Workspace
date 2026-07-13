@@ -71,3 +71,14 @@
 - Updated the project README with architecture, development, build, run, and Git workflow guidance.
 - Created the `develop` and `feature/task-006` branch structure.
 - Made no application feature, UI, CSS, or JavaScript changes.
+
+### TASK-006 — Editable Reservation Details completed
+
+- Replaced the selected-item summary with a compact editable Reservation Details form.
+- Added all approved Reservation, Restaurant, Guests, Menu & Notes fields.
+- Routed valid edits through the central `updateReservationItem()` State API.
+- Synchronized Reservation Timeline and Output Preview through existing state subscriptions.
+- Added inline validation for positive days, valid dates and times, approved statuses, non-negative guest counts, and HTTP/HTTPS Location Links.
+- Added an image placeholder without upload or persistence behavior.
+- Added responsive, keyboard-accessible controls and visible focus states.
+- Added no Local Storage, Save persistence, PDF, AI Package, Duplicate, Delete, backend, or cloud synchronization.

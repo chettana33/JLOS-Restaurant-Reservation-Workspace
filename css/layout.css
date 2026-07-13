@@ -82,6 +82,11 @@ body {
   flex-direction: column;
 }
 
+.workspace-panel--details {
+  display: flex;
+  flex-direction: column;
+}
+
 .panel-header {
   justify-content: space-between;
   min-height: 4.5rem;
@@ -98,6 +103,27 @@ body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-3);
+}
+
+.reservation-form-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.reservation-form-grid--reservation {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.reservation-form-grid--restaurant {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.reservation-form-grid--guests {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.reservation-form-grid--notes {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
 }
 
 .field-display--wide {
@@ -168,6 +194,10 @@ body {
     min-height: auto;
   }
 
+  .reservation-form-grid--reservation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .preview-stage {
     padding: var(--space-1);
   }
@@ -208,6 +238,12 @@ body {
     min-height: auto;
   }
 
+  .reservation-form-grid--reservation,
+  .reservation-form-grid--restaurant,
+  .reservation-form-grid--notes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .guest-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -221,7 +257,8 @@ body {
 @media (max-width: 30rem) {
   .project-meta,
   .field-grid,
-  .menu-summary {
+  .menu-summary,
+  .reservation-form-grid--guests {
     grid-template-columns: 1fr;
   }
 

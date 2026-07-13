@@ -377,104 +377,152 @@
   background: var(--color-navy-soft);
 }
 
-.selected-item-summary {
-  min-height: calc(100% - 4.5rem);
-  padding: var(--space-5);
+.reservation-details-form {
+  flex: 1;
+  min-height: 0;
+  padding: var(--space-3);
+  overflow-y: auto;
   background: var(--color-surface-subtle);
 }
 
-.selected-item-summary__loading,
+.reservation-details-form__loading,
 .output-preview-paper__loading {
   margin: 0;
   color: var(--color-text-muted);
   font-size: 0.75rem;
 }
 
-.selected-item-summary__heading {
-  padding: var(--space-5);
-  background: var(--color-navy);
-  border-radius: var(--radius-md);
-}
-
-.selected-item-summary__eyebrow {
-  display: block;
-  margin-bottom: var(--space-2);
-  color: #b9c4d4;
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.selected-item-summary__heading h3 {
-  margin: 0;
-  color: #ffffff;
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  letter-spacing: -0.025em;
-  line-height: 1.2;
-}
-
-.selected-item-summary__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3);
-  margin: var(--space-4) 0 0;
-}
-
-.selected-summary-field {
-  min-width: 0;
+.reservation-form-section {
   padding: var(--space-4);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
 }
 
-.selected-summary-field dt {
-  margin-bottom: var(--space-1);
-  color: var(--color-text-muted);
-  font-size: 0.625rem;
-  font-weight: 650;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+.reservation-form-section + .reservation-form-section {
+  margin-top: var(--space-3);
 }
 
-.selected-summary-field dd {
+.reservation-form-section__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.reservation-form-section__header h3 {
   margin: 0;
   color: var(--color-navy);
   font-size: 0.8125rem;
-  font-weight: 700;
-  overflow-wrap: anywhere;
 }
 
-.selected-summary-field dd.status-badge {
-  display: inline-flex;
+.reservation-form-section__header p {
+  margin: 0.0625rem 0 0;
+  color: var(--color-text-muted);
   font-size: 0.625rem;
 }
 
-.selected-summary-field dd.status-badge--draft,
-.selected-summary-field dd.status-badge--archived {
+.reservation-form-field {
+  min-width: 0;
+}
+
+.reservation-form-field--wide {
+  grid-column: 1 / -1;
+}
+
+.reservation-form-field label {
+  display: block;
+  margin-bottom: 0.25rem;
   color: var(--color-text-muted);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
 }
 
-.selected-summary-field dd.status-badge--pending,
-.selected-summary-field dd.status-badge--reconfirm {
-  color: var(--color-amber-text);
+.reservation-form-field input,
+.reservation-form-field select,
+.reservation-form-field textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.5rem;
+  padding: 0.5625rem 0.6875rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
 }
 
-.selected-summary-field dd.status-badge--requested {
-  color: var(--color-blue-text);
+.reservation-form-field textarea {
+  min-height: 4.5rem;
+  resize: vertical;
 }
 
-.selected-summary-field dd.status-badge--confirmed {
-  color: var(--color-green-text);
+.reservation-form-field input::placeholder,
+.reservation-form-field textarea::placeholder {
+  color: var(--color-text-faint);
 }
 
-.selected-summary-field dd.status-badge--cancelled {
+.reservation-form-field input:hover,
+.reservation-form-field select:hover,
+.reservation-form-field textarea:hover {
+  border-color: #aeb8c5;
+}
+
+.reservation-form-field input:focus-visible,
+.reservation-form-field select:focus-visible,
+.reservation-form-field textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-blue-text);
+  box-shadow: 0 0 0 3px rgb(49 92 145 / 16%);
+}
+
+.reservation-form-field [aria-invalid="true"] {
+  border-color: var(--color-red-text);
+  box-shadow: 0 0 0 3px rgb(155 48 55 / 10%);
+}
+
+.reservation-form-field__error {
+  min-height: 0.875rem;
+  margin: 0.1875rem 0 0;
   color: var(--color-red-text);
+  font-size: 0.5625rem;
+  line-height: 1.35;
 }
 
-.selected-summary-field dd.status-badge--completed {
-  color: #ffffff;
+.reservation-image-dropzone {
+  display: grid;
+  min-height: 5rem;
+  padding: var(--space-3);
+  color: var(--color-text-muted);
+  background: var(--color-surface-subtle);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  place-items: center;
+}
+
+.reservation-image-dropzone__icon,
+.reservation-image-dropzone strong,
+.reservation-image-dropzone > span:last-child {
+  display: block;
+}
+
+.reservation-image-dropzone__icon {
+  color: var(--color-accent);
+  font-size: 1.125rem;
+}
+
+.reservation-image-dropzone strong {
+  color: var(--color-navy);
+  font-size: 0.6875rem;
+}
+
+.reservation-image-dropzone > span:last-child {
+  font-size: 0.625rem;
 }
 
 .output-preview-paper {
@@ -533,6 +581,39 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 3%;
   margin: 6% 0 0;
+}
+
+.output-preview-paper__service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4%;
+  margin-top: 5%;
+}
+
+.output-preview-paper__service {
+  min-width: 0;
+  padding: 3%;
+  background: var(--color-surface-subtle);
+  border-radius: 0.2rem;
+}
+
+.output-preview-paper__service h4 {
+  margin: 0 0 2%;
+  color: var(--color-text-muted);
+  font-size: clamp(0.34rem, 0.56vw, 0.5rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.output-preview-paper__service p {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--color-navy);
+  font-size: clamp(0.38rem, 0.64vw, 0.58rem);
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .output-preview-paper__details div {
@@ -918,12 +999,14 @@
     grid-template-columns: minmax(3.5rem, auto) minmax(0, 1fr) auto;
   }
 
-  .selected-item-summary {
+  .reservation-details-form {
     padding: var(--space-3);
   }
 
-  .selected-item-summary__grid {
-    grid-template-columns: 1fr;
+  .reservation-form-field input,
+  .reservation-form-field select,
+  .reservation-form-field textarea {
+    min-height: 2.75rem;
   }
 
   .preview-paper {

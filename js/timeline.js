@@ -334,6 +334,7 @@ export function createBlankReservationItem(referenceItem) {
     time: "",
     title: "",
     status: "pending",
+    confirmationNumber: "",
     restaurantName: "",
     phone: null,
     contact: null,

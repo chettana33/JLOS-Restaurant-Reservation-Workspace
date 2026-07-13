@@ -7,7 +7,7 @@
 - Sprint: Sprint 3
 - Architecture: Generation 2
 - Current navigation model: Reservation Timeline
-- Current task: TASK-005 Single Source of Truth State Management
+- Current task: TASK-006 Editable Reservation Details
 
 ## Source of Truth
 
@@ -35,10 +35,18 @@
 - Stored state: `project`, `reservationItems`, `selectedItemId`
 - Derived state: `selectedItem`
 
+## Reservation Details
+
+- Editable panel module: `js/editor.js`
+- Full task specification: `Prompts/Sprint_03/TASK-006.md`
+- Updates: `updateReservationItem(id, changes)`
+- Synchronization: Central state subscriptions update Reservation Timeline, Reservation Details, and Output Preview
+- Validation: Inline, field-specific, and non-persistent
+
 ## Current Scope
 
 - Current item type: `restaurant`
 - New item default status: `pending`
 - Future item types are documentation-only until separately approved.
-- TASK-005 coordinates Reservation Timeline, Reservation Details, and Output Preview through central in-memory state subscriptions.
-- Full Reservation Details editing and persistence remain out of scope.
+- TASK-006 implements in-memory Reservation Details editing through central state subscriptions.
+- Local Storage, Save persistence, PDF, AI Package, Duplicate, Delete, image persistence, backend, and cloud sync remain out of scope.

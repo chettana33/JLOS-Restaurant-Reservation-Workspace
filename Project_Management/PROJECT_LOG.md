@@ -109,3 +109,15 @@ Daily engineering journal.
 - สร้าง Branch `develop` และ `feature/task-006` โดยไม่มีการแก้ Application Feature ใน Branch ใหม่
 - Commit Workspace ปัจจุบันและ Push Branch ที่กำหนดขึ้น GitHub
 - ไม่มีการแก้ UI, CSS, JavaScript หรือ Application Feature
+
+## 2026-07-13 — TASK-006 completed
+
+- สถานะ: **Completed**
+- เพิ่ม Reservation Details Form แบบแก้ไขได้ครบตามฟิลด์ที่อนุมัติ
+- อ่าน Selected Reservation Item และส่งการแก้ไขผ่าน Central State API เท่านั้น
+- Sync การแก้ไขไป Reservation Timeline และ Output Preview ผ่าน State Subscriptions
+- เพิ่ม Inline Validation สำหรับ Day, Date, Time, Status, Guest Counts และ Location Link
+- เพิ่ม `confirmationNumber` เป็น Optional Data Contract และค่าเริ่มต้นว่างสำหรับ New Reservation
+- เพิ่ม Image Placeholder โดยไม่มี Upload หรือ Persistence
+- รองรับ Keyboard, Focus State และ Responsive Layout สำหรับ Desktop, Tablet และ Mobile
+- ไม่มี Local Storage, Save Persistence, PDF, AI Package, Duplicate, Delete, Backend หรือ Cloud Sync
