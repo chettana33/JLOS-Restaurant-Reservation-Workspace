@@ -133,3 +133,15 @@ Daily engineering journal.
 - รักษา A4 Landscape Ratio และให้เนื้อหาพอดีหนึ่งหน้าใน Desktop, Tablet และ Mobile
 - เพิ่ม Print CSS ให้พิมพ์เฉพาะ Output Preview Paper
 - ไม่มี PDF Generation, Download, Local Storage, Toolbar Actions, Save, Duplicate, Delete, AI Package, Backend หรือ Cloud Sync
+
+## 2026-07-13 — TASK-008 completed
+
+- สถานะ: **Completed**
+- เปิดใช้งานปุ่ม Save และเพิ่ม Open Project ใน Toolbar
+- บันทึก Central State เป็นไฟล์ JSON เวอร์ชัน `4.0-alpha` โดยไม่เก็บ Derived Selected Item หรือ Temporary UI State
+- เพิ่มการตรวจ JSON Structure, Project, Reservation Items, Duplicate IDs, Status และ Version ก่อน Load
+- เพิ่ม `replaceState(nextState)` เพื่อแทนที่ State แบบ Atomic และแจ้ง Subscribers เพียงครั้งเดียว
+- Restore Header, Reservation Timeline, Reservation Details และ Output Preview ผ่าน State Subscriptions
+- Invalid Selection fallback ไป Reservation Item แรก และ Empty List fallback เป็น `null`
+- เพิ่ม Accessible Live Feedback และคืน Focus ไปยัง Open Project หลังเลือกไฟล์
+- ไม่มี Local Storage, Autosave, Backend, Cloud Sync, Duplicate, Delete, PDF, Settings หรือ AI Package

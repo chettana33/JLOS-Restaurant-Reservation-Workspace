@@ -20,26 +20,26 @@
           </div>
         </div>
 
-        <dl class="project-meta" aria-label="Current tour information">
+        <dl class="project-meta" aria-label="Current tour information" data-project-summary>
           <div class="project-meta__item">
             <dt>Tour Code</dt>
-            <dd>JPN-2607-018</dd>
+            <dd data-project-field="tourCode">JPN-2607-018</dd>
           </div>
           <div class="project-meta__item">
             <dt>Customer</dt>
-            <dd>Siam Horizon Travel</dd>
+            <dd data-project-field="customer">Siam Horizon Travel</dd>
           </div>
           <div class="project-meta__item">
             <dt>Guide</dt>
-            <dd>Ms. Aiko Tanaka</dd>
+            <dd data-project-field="guide">Ms. Aiko Tanaka</dd>
           </div>
           <div class="project-meta__item">
             <dt>Travel Date</dt>
-            <dd>18–24 Jul 2026</dd>
+            <dd data-project-field="travelDate">18–24 Jul 2026</dd>
           </div>
           <div class="project-meta__item">
             <dt>Project Status</dt>
-            <dd><span class="status-badge status-badge--working">Working</span></dd>
+            <dd><span class="status-badge status-badge--working" data-project-field="projectStatus">Working</span></dd>
           </div>
         </dl>
       </header>
@@ -51,7 +51,17 @@
           <button class="button button--danger-quiet" type="button" disabled title="Available in a later task">Delete</button>
         </div>
         <div class="toolbar__group toolbar__group--end">
-          <button class="button" type="button" disabled title="Available in a later task">Save</button>
+          <p id="project-file-status" class="toolbar-status" role="status" aria-live="polite" aria-atomic="true"></p>
+          <button class="button" type="button" data-action="save-project">Save</button>
+          <button class="button" type="button" data-action="open-project">Open Project</button>
+          <input
+            id="project-file-input"
+            class="visually-hidden"
+            type="file"
+            accept="application/json,.json"
+            aria-label="Choose a JLOS project JSON file"
+            tabindex="-1"
+          >
           <button class="button" type="button" disabled title="Available in a later task">AI Package</button>
           <button class="button" type="button" disabled title="Available in a later task">Export PDF</button>
           <button class="button button--icon-text" type="button" disabled title="Available in a later task">
