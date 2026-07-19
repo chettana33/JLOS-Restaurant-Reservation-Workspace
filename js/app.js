@@ -4,6 +4,7 @@
 
 import { initializeReservationDetails } from "./editor.js";
 import { initializeOutputPreview } from "./preview.js";
+import { initializePdfExport } from "./pdf-export.js";
 import { initializeProjectFileControls } from "./storage.js";
 import { getProject, initializeState, subscribe } from "./state.js";
 import { initializeReservationTimeline, validateTimelineData } from "./timeline.js";
@@ -88,6 +89,10 @@ async function startApplication() {
     fileInput: document.querySelector("#project-file-input"),
     statusElement: document.querySelector("#project-file-status"),
     reservationItemSchema,
+  });
+  initializePdfExport({
+    button: document.querySelector('[data-action="export-pdf"]'),
+    previewElement: document.querySelector("#output-preview-paper"),
   });
 }
 
