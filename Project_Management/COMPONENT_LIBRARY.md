@@ -74,7 +74,19 @@ Displays workspace actions. TASK-003 does not add action behavior.
 - Owns: Project data, Reservation Item collection, selected item ID
 - Derives: Selected Reservation Item
 - API: Initialize, read snapshots, select, add, update, subscribe, notify
-- Does not provide: Local Storage, backend sync, save, delete, duplicate, or export
+- Replacement API: `replaceState(nextState)` performs one atomic state replacement and subscriber notification
+- Does not provide: Local Storage, backend sync, delete, duplicate, PDF, or AI Package export
+
+### Project File Controls
+
+- Module: `js/storage.js`
+- Status: Implemented in TASK-008
+- Enables: Save and Open Project Toolbar actions
+- Saves only the approved version, timestamp, Project, Reservation Items, and selected item ID
+- Loads validated JSON through the central State replacement API
+- Rejects malformed data, duplicate IDs, unknown statuses, and unsupported versions without changing current state
+- Announces Save and Load results through an accessible live status message
+- Uses local JSON file download and selection only; no Local Storage or backend
 
 ## Component Rules
 

@@ -54,6 +54,27 @@ function prepareReservationItems(items) {
   return preparedItems;
 }
 
+function prepareReplacementItems(items) {
+  if (!Array.isArray(items)) {
+    throw new TypeError("Replacement state requires reservationItems to be an array.");
+  }
+
+  const seenIds = new Set();
+
+  return items.map((item, index) => {
+    if (!isValidItem(item)) {
+      throw new TypeError(`Reservation Item at index ${index} is malformed.`);
+    }
+
+    if (seenIds.has(item.id)) {
+      throw new TypeError(`Duplicate Reservation Item id "${item.id}" is not allowed.`);
+    }
+
+    seenIds.add(item.id);
+    return clone(item);
+  });
+}
+
 export function initializeState(projectData = {}, reservationItems = []) {
   const safeProjectData = projectData && typeof projectData === "object" ? projectData : {};
 
@@ -89,6 +110,37 @@ export function getSelectedItemId() {
 export function getSelectedItem() {
   const selectedItem = state.reservationItems.find((item) => item.id === state.selectedItemId);
   return selectedItem ? clone(selectedItem) : null;
+}
+
+/**
+ * Atomically replaces all persisted application state after file validation.
+ * Invalid selection is normalized to the first available Reservation Item.
+ */
+export function replaceState(nextState) {
+  if (!nextState || typeof nextState !== "object" || Array.isArray(nextState)) {
+    throw new TypeError("Replacement state must be an object.");
+  }
+
+  if (!nextState.project || typeof nextState.project !== "object" || Array.isArray(nextState.project)) {
+    throw new TypeError("Replacement state requires a project object.");
+  }
+
+  const nextProject = {
+    ...DEFAULT_PROJECT,
+    ...clone(nextState.project),
+  };
+  const nextItems = prepareReplacementItems(nextState.reservationItems);
+  const requestedSelection = nextState.selectedItemId;
+  const nextSelectedItemId = nextItems.some((item) => item.id === requestedSelection)
+    ? requestedSelection
+    : (nextItems[0]?.id ?? null);
+
+  state.project = nextProject;
+  state.reservationItems = nextItems;
+  state.selectedItemId = nextSelectedItemId;
+  notifySubscribers();
+
+  return nextSelectedItemId;
 }
 
 export function setSelectedItemId(id) {
