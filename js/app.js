@@ -4,6 +4,7 @@
 
 import { initializeReservationDetails } from "./editor.js";
 import { initializeOutputPreview } from "./preview.js";
+import { initializePdfExport } from "./pdf-export.js";
 import { initializeState } from "./state.js";
 import { initializeReservationTimeline, validateTimelineData } from "./timeline.js";
 
@@ -54,6 +55,10 @@ async function startApplication() {
   });
   initializeReservationDetails(document.querySelector("#reservation-details"));
   initializeOutputPreview(document.querySelector("#output-preview-paper"));
+  initializePdfExport({
+    button: document.querySelector('[data-action="export-pdf"]'),
+    previewElement: document.querySelector("#output-preview-paper"),
+  });
 }
 
 startApplication();

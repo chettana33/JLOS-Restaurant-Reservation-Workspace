@@ -126,6 +126,42 @@
   gap: var(--space-2);
 }
 
+.button--export[aria-busy="true"] {
+  position: relative;
+  padding-left: 1.9rem;
+}
+
+.button--export[aria-busy="true"]::before {
+  position: absolute;
+  top: 50%;
+  left: 0.65rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 2px solid currentcolor;
+  border-right-color: transparent;
+  border-radius: 999px;
+  content: "";
+  transform: translateY(-50%);
+  animation: pdf-export-spin 0.8s linear infinite;
+}
+
+.pdf-export-status {
+  align-self: center;
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  font-weight: 650;
+}
+
+.pdf-export-status--error {
+  color: var(--color-accent);
+}
+
+@keyframes pdf-export-spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
 .workspace-panel {
   overflow: hidden;
   background: var(--color-surface);
