@@ -7,7 +7,7 @@
 - Sprint: Sprint 5
 - Architecture: Generation 2
 - Current navigation model: Reservation Timeline
-- Current task: TASK-008 Save and Load Project
+- Current task: TASK-009 Export PDF
 
 ## Source of Truth
 
@@ -50,7 +50,17 @@
 - Data sources: `getProject()` and `getSelectedItem()` through the central State API
 - Synchronization: Direct central state subscription
 - Format: One responsive A4 landscape Restaurant Reservation Summary
-- Print preparation: Output Preview paper only; no PDF generation
+- Print preparation: Output Preview paper
+- PDF export: Client-side single-page A4 landscape download of the current Output Preview
+
+## PDF Export
+
+- Export module: `js/pdf-export.js`
+- Task branch: `feature/task-009`
+- Export source: Current live Output Preview
+- Output: Single-page A4 landscape PDF
+- Filename: `Quotation-<YYYYMMDD>-<HHMM>.pdf`
+- Runtime: Browser-only with no backend or external PDF dependency
 
 ## Project Files
 
@@ -69,4 +79,5 @@
 - TASK-006 implements in-memory Reservation Details editing through central state subscriptions.
 - TASK-007 implements the live customer-facing Output Preview for one selected reservation.
 - TASK-008 implements explicit Save and Open Project actions using local JSON files.
-- Local Storage, autosave, PDF, AI Package, Duplicate, Delete, image persistence, backend, and cloud sync remain out of scope.
+- TASK-009 implements explicit client-side PDF export of the current live Output Preview.
+- Local Storage, autosave, AI Package, Duplicate, Delete, image persistence, backend, and cloud sync remain out of scope.

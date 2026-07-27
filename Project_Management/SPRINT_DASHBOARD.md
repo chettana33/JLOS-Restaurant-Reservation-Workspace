@@ -26,23 +26,21 @@ chettana33/JLOS-Restaurant-Reservation-Workspace
 - TASK-006 Editable Reservation Details
 - TASK-007 Live Output Preview
 - TASK-008 Save and Load Project
+- TASK-009 Export PDF
 
 ## Next
 
-- TASK-009 Duplicate Reservation
-- TASK-010 Delete Reservation
-- TASK-011 Export PDF
-- TASK-012 Settings
-- TASK-013 AI Package Export
+- Pending owner-approved scope and task numbering
+- Historical backlog candidates: Duplicate Reservation, Delete Reservation, Settings, AI Package Export
 
 ## Current Progress
 
-80%
+90%
 
 ## Current Branch
 
-feature/task-008
+feature/task-009
 
 ## Status
 
-Ready for Review
+Implementation complete; documentation reconciliation and Draft PR pending

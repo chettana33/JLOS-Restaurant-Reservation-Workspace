@@ -104,3 +104,13 @@
 - Added accessible live feedback and focus return after file selection.
 - Preserved responsive Toolbar behavior without horizontal scrolling.
 - Added no Local Storage, autosave, backend, cloud sync, Duplicate, Delete, PDF, Settings, or AI Package behavior.
+
+### TASK-009 — Export PDF completed on feature branch
+
+- Enabled the Export PDF Toolbar action.
+- Added `js/pdf-export.js` for dependency-free client-side PDF generation.
+- Exported the current live Output Preview as a single-page A4 landscape PDF.
+- Added timestamped filenames in the form `Quotation-<YYYYMMDD>-<HHMM>.pdf`.
+- Added accessible busy, success, and error feedback while preserving the original button label.
+- Preserved TASK-008 Save/Open behavior after resolving the branch conflict with `develop`.
+- Added no Duplicate, Delete, Settings, AI Package, backend, cloud sync, or Local Storage behavior.

@@ -145,3 +145,15 @@ Daily engineering journal.
 - Invalid Selection fallback ไป Reservation Item แรก และ Empty List fallback เป็น `null`
 - เพิ่ม Accessible Live Feedback และคืน Focus ไปยัง Open Project หลังเลือกไฟล์
 - ไม่มี Local Storage, Autosave, Backend, Cloud Sync, Duplicate, Delete, PDF, Settings หรือ AI Package
+
+## 2026-07-19 — TASK-009 Export PDF completed on feature branch
+
+- สถานะ: **Implementation complete / Draft PR pending**
+- เปิดใช้งานปุ่ม Export PDF ใน Toolbar
+- เพิ่ม `js/pdf-export.js` สำหรับสร้าง PDF ฝั่ง Browser โดยไม่ใช้ Backend หรือ External PDF Library
+- Export เฉพาะ Live Output Preview ปัจจุบันเป็น PDF ขนาด A4 Landscape หนึ่งหน้า
+- ใช้ชื่อไฟล์ `Quotation-<YYYYMMDD>-<HHMM>.pdf`
+- เพิ่มสถานะ Preparing, Exporting, Success และ Error ที่รองรับ Accessibility
+- Merge `origin/develop` เข้าสู่ `feature/task-009` และแก้ Conflict โดยรักษา TASK-008 Save/Open และ TASK-009 PDF Export
+- Commit หลังแก้ Conflict: `f409d63dbb1568dd466003c9563842dd6f1224c6`
+- งานถัดไปและหมายเลข Task รอพี่เจอนุมัติ Scope เพื่อไม่ให้ขัดกับ Historical Backlog
