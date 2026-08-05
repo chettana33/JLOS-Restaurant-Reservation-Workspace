@@ -5,9 +5,9 @@
 ## Branch & PR Status
 
 - `main`: protected, review-ready
-- `develop`: integration baseline = `d77a0df`
-- `feature/task-010` (PR #6): TASK-010 Duplicate + Delete — open, รอ review/merge
-- `docs/handoff-checkpoint` (PR #7): เอกสาร handoff/checkpoint นี้ — open, รอ review/merge
+- `develop`: integration baseline = `24fa530` (TASK-001 ถึง TASK-010 ทั้งหมด merge แล้ว)
+- PR #6 (feature/task-010): merged เข้า develop
+- PR #7 (docs/handoff-checkpoint): merged เข้า develop
 
 ## Completed (ใน develop)
 
@@ -20,10 +20,7 @@
 - TASK-007 Live Output Preview
 - TASK-008 Save and Load Project
 - TASK-009 Export PDF (PR #4 merged)
-
-## Pending Merge (feature branch, รอ review)
-
-- TASK-010 Duplicate + Delete Reservation (PR #6, `feature/task-010`)
+- TASK-010 Duplicate + Delete Reservation (PR #6 merged)
 
 ## Next Tasks (ตาม ROADMAP)
 
@@ -48,3 +45,4 @@
 
 - `artifacts/` ใน working copy เป็นหลักฐานการทดสอบ (screenshot/PDF) ไม่ควร commit
 - PR #5 (docs reconcile task-009) ถูกปิดเป็น superseded ตามคำสั่งพี่เจ
+- feature branches ของ PR #6/#7 ถูกลบหลัง merge แล้ว (gitHub auto-delete)
