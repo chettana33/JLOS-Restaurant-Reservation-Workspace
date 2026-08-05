@@ -76,7 +76,6 @@ Displays workspace actions. TASK-003 does not add action behavior.
 - API: Initialize, read snapshots, select, add, update, subscribe, notify
 - Replacement API: `replaceState(nextState)` performs one atomic state replacement and subscriber notification
 - Does not provide: Local Storage, backend sync, delete, duplicate, PDF, or AI Package export
-
 ### Item Actions (Duplicate / Delete)
 
 - Module: `js/timeline.js` + native `<dialog>` in `index.html`
@@ -97,6 +96,17 @@ Displays workspace actions. TASK-003 does not add action behavior.
 - Rejects malformed data, duplicate IDs, unknown statuses, and unsupported versions without changing current state
 - Announces Save and Load results through an accessible live status message
 - Uses local JSON file download and selection only; no Local Storage or backend
+
+### AI Package Export
+
+- Module: `js/ai-package.js`
+- Status: Implemented in TASK-011
+- Enables: `AI Package` Toolbar action
+- Downloads an AI-ready JSON document (`format: jlos-ai-package`, `formatVersion: 1.0`)
+- Reads the full project and Reservation Items from the Central State API and sanitizes items against the reservation item schema via the shared `sanitizeValue`
+- Adds a derived `context` block: purpose, real-value summary, day groups, guest/reservation totals, and official status counts
+- Excludes `selectedItemId` as transient workspace state and fabricates no data
+- Announces the exported filename through an accessible live status message
 
 ## Component Rules
 

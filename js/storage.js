@@ -240,7 +240,7 @@ export function restoreProjectText(text, reservationItemSchema) {
   return replaceState(nextState);
 }
 
-function sanitizeValue(value, schema) {
+export function sanitizeValue(value, schema) {
   if (Array.isArray(value)) {
     return schema.items ? value.map((entry) => sanitizeValue(entry, schema.items)) : [];
   }

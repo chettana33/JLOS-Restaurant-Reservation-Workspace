@@ -114,3 +114,13 @@
 - Duplicate selects the new copy and scrolls it into view; confirmed delete falls back selection and scrolls to the replacement.
 - Cancel and Escape close the dialog without changing state, and focus returns to the Delete button.
 - Added no Local Storage, autosave, backend, cloud sync, AI Package, Settings, or PDF behavior.
+
+### TASK-011 — AI Package Export completed
+
+- Enabled the AI Package Toolbar action.
+- Added `js/ai-package.js` to download an AI-ready JSON document (`format: jlos-ai-package`, `formatVersion: 1.0`) built from the full Central State snapshot.
+- Sanitized every Reservation Item against the reservation item schema using the shared `sanitizeValue` exported from `js/storage.js`.
+- Added a derived `context` block with a real-value summary, day groups, reservation/guest totals, and official status counts; no data is fabricated.
+- Excluded `selectedItemId` from the package as transient workspace state.
+- Added accessible live status feedback announcing the exported filename.
+- Kept Settings disabled; added no Local Storage, autosave, backend, cloud sync, AI Package import, or PDF behavior.
