@@ -5,7 +5,8 @@
 ## Project
 
 - Repository: `chettana33/JLOS-Restaurant-Reservation-Workspace`
-- Integration branch: `develop` (`24fa530` — TASK-001..TASK-010 ทั้งหมด merge แล้ว)
+- Integration branch: `develop` (`d76a0cf` — TASK-001..TASK-010 ทั้งหมด merge แล้ว)
+- Open feature branch: `feature/task-011` (PR #8)
 - Sprint: 6
 
 ## Delta Since Previous Checkpoint (2026-07-27 → 2026-08-05)
@@ -31,19 +32,29 @@
    - `START_HERE.md`, `CURRENT_STATE.md`, `checkpoints/CHECKPOINT_LATEST.md`
    - อัปเดต `README.md` และ `START_CHAT.md`
 
+4. **TASK-011 AI Package Export** (`feature/task-011`, commit `4c33bdd`, PR #8 open)
+   - `js/ai-package.js` (ใหม่): export โปรเจกต์เป็น AI-ready JSON (`format: jlos-ai-package`, `formatVersion: 1.0`)
+   - อ่านข้อมูลจริงจาก Central State + sanitize items ผ่าน `sanitizeValue` (export ใหม่จาก `js/storage.js`) ตาม schema
+   - derived `context`: summary, dayGroups, totals, statusCounts; ไม่รวม `selectedItemId`; ไม่มีข้อมูลปลอม
+   - `index.html`: เปิดปุ่ม AI Package (Settings ยัง disabled) / `js/app.js`: wiring / `css`: status style
+   - Test: state 41/41, UI headless 21/21, `node --check` pass
+   - Docs: spec `Prompts/Sprint_06/TASK-011.md` ใหม่ + อัปเดต ARCHITECTURE/DECISIONS(DEC-008)/COMPONENT_LIBRARY/MASTER_INDEX/PROJECT_LOG/CHANGELOG/SPRINT_DASHBOARD
+
+5. **Checkpoint sync** (`d76a0cf` บน develop) — CURRENT_STATE/CHECKPOINT_LATEST ปรับให้ตรงหลัง PR #6/#7 merged
+
 ## Current State
 
-- develop มี TASK-001..TASK-010 ทั้งหมด (merge แล้ว) ที่ `24fa530`
-- PR #6 (TASK-010) merged
-- PR #7 (handoff docs) merged
+- develop มี TASK-001..TASK-010 ทั้งหมด (merge แล้ว) ที่ `d76a0cf`
+- PR #8 (TASK-011) รอ review/merge
 
 ## Next Action
 
-1. เริ่ม TASK-011 AI Package Export (spec ใหม่ใน `Prompts/Sprint_06/`) ตาม ROADMAP
-2. อย่า merge อัตโนมัติ — ให้พี่เจ้าอนุมัติทุก merge
+1. Review/merge PR #8 (feature/task-011) — ต้องให้พี่เจ้าอนุมัติ
+2. เริ่ม TASK-012 Settings (spec ใหม่ใน `Prompts/Sprint_06/`)
+3. อย่า merge อัตโนมัติ — ให้พี่เจ้าอนุมัติทุก merge
 
 ## Integrity
 
-- Baseline develop: `24fa530` (TASK-001..TASK-010)
-- TASK-010 commit: `97446a2` (merged ผ่าน PR #6)
+- Baseline develop: `d76a0cf` (TASK-001..TASK-010)
+- TASK-011 commit: `4c33bdd` (ยังไม่ merge, PR #8 open)
 - ค่าอื่นยึด `CURRENT_STATE.md` + Git history เป็นหลัก

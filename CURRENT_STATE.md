@@ -5,9 +5,10 @@
 ## Branch & PR Status
 
 - `main`: protected, review-ready
-- `develop`: integration baseline = `24fa530` (TASK-001 ถึง TASK-010 ทั้งหมด merge แล้ว)
+- `develop`: integration baseline = `d76a0cf` (TASK-001 ถึง TASK-010 ทั้งหมด merge แล้ว)
 - PR #6 (feature/task-010): merged เข้า develop
 - PR #7 (docs/handoff-checkpoint): merged เข้า develop
+- PR #8 (feature/task-011): TASK-011 AI Package Export — open, รอ review/merge
 
 ## Completed (ใน develop)
 
@@ -22,17 +23,20 @@
 - TASK-009 Export PDF (PR #4 merged)
 - TASK-010 Duplicate + Delete Reservation (PR #6 merged)
 
+## Pending Merge (feature branch, รอ review)
+
+- TASK-011 AI Package Export (PR #8, `feature/task-011`)
+
 ## Next Tasks (ตาม ROADMAP)
 
-- TASK-011 AI Package Export
 - TASK-012 Settings
 
 ## Architecture Snapshot
 
 - Static browser app, Semantic HTML + CSS + vanilla JS, ไม่มี backend
 - Single Source of Truth: `js/state.js` (central in-memory state, mutation API)
-- Modules: `app.js` (startup), `timeline.js`, `editor.js`, `preview.js`, `pdf-export.js`, `storage.js`, `state.js`
-- หลักฐานเอกสาร: `Project_Management/ARCHITECTURE.md`, `DECISIONS.md` (ถึง DEC-007), `MASTER_INDEX.md`, `SPRINT_DASHBOARD.md`
+- Modules: `app.js` (startup), `timeline.js`, `editor.js`, `preview.js`, `pdf-export.js`, `ai-package.js`, `storage.js`, `state.js`
+- หลักฐานเอกสาร: `Project_Management/ARCHITECTURE.md`, `DECISIONS.md` (ถึง DEC-008), `MASTER_INDEX.md`, `SPRINT_DASHBOARD.md`
 
 ## Guardrails
 
