@@ -38,9 +38,10 @@
 
 ## Next Action
 
-1. Sprint 6 จบ — งานถัดไปตาม ROADMAP: **Hotel → Bus → Attraction → Quotation**
-2. ก่อนเริ่ม module ใหม่ต้องมี spec + พี่เจ้าอนุมัติ scope
-3. อย่า merge อัตโนมัติ — ให้พี่เจ้าอนุมัติทุก merge
+1. Sprint 6 จบ — พี่เจเลือก **Restaurant polish** เป็นงานถัดไป (ปรับแต่ง/เพิ่ม feature ให้ Restaurant ก่อนไป module ใหม่)
+2. หยุดพักที่นี่ — วันหลังเริ่มด้วย Task Design: ถามพี่เจ้าว่าอยากปรับแต่ง/เพิ่ม feature อะไร แล้วเขียน spec + รออนุมัติ
+3. หลัง polish เสร็จ → Hotel → Bus → Attraction → Quotation (ต้องมี spec + พี่เจ้าอนุมัติก่อนเริ่ม)
+4. อย่า merge อัตโนมัติ — ให้พี่เจ้าอนุมัติทุก merge
 
 ## Integrity
 

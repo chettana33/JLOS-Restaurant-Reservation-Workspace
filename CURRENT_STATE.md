@@ -32,7 +32,9 @@
 
 ## Next Tasks (ตาม ROADMAP)
 
-Sprint 6 (Restaurant module) เสร็จสมบูรณ์ 100% — ROADMAP ต่อไปคือ Hotel → Bus → Attraction → Quotation (รออนุมัติ spec ก่อนเริ่ม)
+Sprint 6 (Restaurant module) เสร็จสมบูรณ์ 100%
+- **ถัดไป (พี่เจเลือก 2026-08-05): Restaurant polish** — ปรับแต่ง/เพิ่ม feature ให้ Restaurant ก่อนไป module ใหม่
+- หลัง polish เสร็จ → Hotel → Bus → Attraction → Quotation (รออนุมัติ spec ก่อนเริ่มแต่ละ module)
 
 ## Architecture Snapshot
 
