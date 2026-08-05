@@ -145,3 +145,14 @@ Daily engineering journal.
 - Invalid Selection fallback ไป Reservation Item แรก และ Empty List fallback เป็น `null`
 - เพิ่ม Accessible Live Feedback และคืน Focus ไปยัง Open Project หลังเลือกไฟล์
 - ไม่มี Local Storage, Autosave, Backend, Cloud Sync, Duplicate, Delete, PDF, Settings หรือ AI Package
+
+## 2026-08-05 — TASK-010 completed
+
+- สถานะ: **Completed**
+- เพิ่ม `duplicateReservationItem(id)` ใน `js/state.js` — clone ทุกฟิลด์ของ item ต้นทาง ใช้ UUID ใหม่ อัปเดต `createdAt`/`updatedAt` และแทรกต่อจากต้นทาง
+- เพิ่ม `deleteReservationItem(id)` — ลบ item และเมื่อ item ที่ลบถูกเลือก จะ fallback ไป item ตำแหน่งเดิม → ก่อนหน้า → `null`
+- เปิดใช้งานปุ่ม Duplicate และ Delete ใน Toolbar โดย disable เมื่อไม่มี item ที่ถูกเลือก
+- เพิ่ม Confirm Dialog แบบ native `<dialog>` สำหรับ Delete ระบุชื่อร้าน/ชื่อ item ที่จะลบ รองรับ Cancel และ Escape โดยไม่เปลี่ยน state
+- หลัง Duplicate เลือก item ที่ซ้ำและเลื่อนไปยังตำแหน่งทันที หลัง Confirm Delete fallback selection และเลื่อนไปยัง item ใหม่
+- ทดสอบ State API 16/16 และ UI interaction 14/14 ผ่าน (headless browser) ไม่มี console error
+- ไม่มี Local Storage, Autosave, Backend, Cloud Sync, AI Package, Settings หรือ PDF ที่เปลี่ยนแปลง

@@ -47,8 +47,8 @@
       <nav class="toolbar" aria-label="Workspace actions">
         <div class="toolbar__group">
           <button class="button button--primary" type="button" data-action="new-reservation">New Reservation</button>
-          <button class="button" type="button" disabled title="Available in a later task">Duplicate</button>
-          <button class="button button--danger-quiet" type="button" disabled title="Available in a later task">Delete</button>
+          <button class="button" type="button" data-action="duplicate-reservation">Duplicate</button>
+          <button class="button button--danger-quiet" type="button" data-action="delete-reservation">Delete</button>
         </div>
         <div class="toolbar__group toolbar__group--end">
           <p id="project-file-status" class="toolbar-status" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -115,6 +115,22 @@
           </div>
         </aside>
       </main>
+
+      <dialog
+        id="delete-confirm-dialog"
+        class="confirm-dialog"
+        aria-labelledby="delete-confirm-title"
+        aria-describedby="delete-confirm-message"
+      >
+        <h2 id="delete-confirm-title" class="confirm-dialog__title">Delete Reservation</h2>
+        <p id="delete-confirm-message" class="confirm-dialog__message" data-delete-confirm-name>
+          This will permanently remove the selected reservation from the project.
+        </p>
+        <div class="confirm-dialog__actions">
+          <button class="button" type="button" data-action="cancel-delete">Cancel</button>
+          <button class="button button--danger-quiet" type="button" data-action="confirm-delete">Delete</button>
+        </div>
+      </dialog>
     </div>
     <script type="module" src="js/app.js"></script>
   </body>

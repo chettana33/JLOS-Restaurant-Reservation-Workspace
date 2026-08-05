@@ -4,10 +4,10 @@
 
 - Product: Restaurant Reservation Workspace
 - Version: v4.0 Alpha
-- Sprint: Sprint 5
+- Sprint: Sprint 6
 - Architecture: Generation 2
 - Current navigation model: Reservation Timeline
-- Current task: TASK-008 Save and Load Project
+- Current task: TASK-010 Duplicate and Delete Reservation
 
 ## Source of Truth
 
@@ -61,6 +61,13 @@
 - State restoration: Atomic replacement through `replaceState(nextState)`
 - Local Storage, autosave, cloud sync, and backend persistence are not used
 
+## Item Actions
+
+- Duplicate: `duplicateReservationItem(id)` in `js/state.js`
+- Delete: `deleteReservationItem(id)` in `js/state.js` + native confirm `<dialog>` in `index.html`
+- Full task specification: `Prompts/Sprint_06/TASK-010.md`
+- Architecture decision: `Project_Management/DECISIONS.md` — DEC-007
+
 ## Current Scope
 
 - Current item type: `restaurant`
@@ -69,4 +76,6 @@
 - TASK-006 implements in-memory Reservation Details editing through central state subscriptions.
 - TASK-007 implements the live customer-facing Output Preview for one selected reservation.
 - TASK-008 implements explicit Save and Open Project actions using local JSON files.
-- Local Storage, autosave, PDF, AI Package, Duplicate, Delete, image persistence, backend, and cloud sync remain out of scope.
+- TASK-009 implements client-side PDF export of the live Output Preview.
+- TASK-010 implements Duplicate and Delete Reservation actions with a confirmation dialog.
+- Local Storage, autosave, AI Package, Settings, image persistence, backend, and cloud sync remain out of scope.

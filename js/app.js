@@ -80,6 +80,9 @@ async function startApplication() {
     container: document.querySelector("#reservation-timeline"),
     countElement: document.querySelector("#timeline-count"),
     newReservationButton: document.querySelector('[data-action="new-reservation"]'),
+    duplicateButton: document.querySelector('[data-action="duplicate-reservation"]'),
+    deleteButton: document.querySelector('[data-action="delete-reservation"]'),
+    deleteConfirmDialog: document.querySelector("#delete-confirm-dialog"),
   });
   initializeReservationDetails(document.querySelector("#reservation-details"));
   initializeOutputPreview(document.querySelector("#output-preview-paper"));
