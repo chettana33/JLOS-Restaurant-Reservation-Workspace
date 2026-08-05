@@ -76,3 +76,12 @@ Major architecture and product decisions are recorded here. New decisions must p
 - Delete contract: Remove the item; when the deleted item was selected, fall back to the item at the deleted position, then the previous item, then `null`.
 - UI: Duplicate and Delete Toolbar actions are enabled only when a Reservation Item is selected. Delete requires confirmation through a native modal `<dialog>` before state changes.
 - Reason: Preserve the Single Source of Truth and prevent duplicated selection/data state across modules.
+
+## DEC-008 — AI Package is an export-only AI-ready JSON document
+
+- Date: 2026-08-05
+- Status: Accepted
+- Sprint: Sprint 6
+- Decision: The `AI Package` Toolbar action downloads the current project as an AI-ready JSON document (`js/ai-package.js`). The document carries real project data and the full sanitized Reservation Item collection read from the Central State API, plus a derived `context` block (purpose, summary, day groups, totals, status counts) for machine-assisted work.
+- Contract: Format `jlos-ai-package`, format version `1.0`; items are sanitized against `data/reservation-item.schema.json` using the shared `sanitizeValue`; `selectedItemId` is intentionally excluded as transient workspace state; no data is fabricated.
+- Reason: Give AI and Codex agents a faithful, schema-consistent snapshot of the current project while keeping a single source of truth for the data itself.

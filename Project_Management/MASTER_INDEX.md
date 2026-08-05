@@ -7,7 +7,7 @@
 - Sprint: Sprint 6
 - Architecture: Generation 2
 - Current navigation model: Reservation Timeline
-- Current task: TASK-010 Duplicate and Delete Reservation
+- Current task: TASK-011 AI Package Export
 
 ## Source of Truth
 
@@ -68,6 +68,16 @@
 - Full task specification: `Prompts/Sprint_06/TASK-010.md`
 - Architecture decision: `Project_Management/DECISIONS.md` — DEC-007
 
+## AI Package Export
+
+- Export module: `js/ai-package.js`
+- Full task specification: `Prompts/Sprint_06/TASK-011.md`
+- Architecture decision: `Project_Management/DECISIONS.md` — DEC-008
+- Format: `jlos-ai-package` / `formatVersion: 1.0`
+- Output: full project + sanitized Reservation Items + derived `context` block
+- Data source: Central State API (`getState()`); items sanitized via shared `sanitizeValue`
+- Excludes: `selectedItemId` (transient), no Local Storage or backend
+
 ## Current Scope
 
 - Current item type: `restaurant`
@@ -78,4 +88,5 @@
 - TASK-008 implements explicit Save and Open Project actions using local JSON files.
 - TASK-009 implements client-side PDF export of the live Output Preview.
 - TASK-010 implements Duplicate and Delete Reservation actions with a confirmation dialog.
-- Local Storage, autosave, AI Package, Settings, image persistence, backend, and cloud sync remain out of scope.
+- TASK-011 implements AI Package export as an AI-ready JSON document.
+- Local Storage, autosave, Settings, image persistence, backend, and cloud sync remain out of scope.

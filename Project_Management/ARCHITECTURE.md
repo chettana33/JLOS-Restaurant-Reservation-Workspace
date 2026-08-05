@@ -19,7 +19,7 @@ Workspace
 
 The Reservation Timeline is the core navigation and operation structure. Each timeline entry is one Reservation Item. Reservation Details and Output Preview consume the same selected item and must not maintain duplicate reservation records.
 
-Export and AI Package remain planned downstream capabilities. They are not implemented in Sprint 1.
+Export and AI Package remain planned downstream capabilities. They are not implemented in Sprint 1. AI Package export is implemented in TASK-011.
 
 ## Central State Architecture
 
@@ -41,7 +41,7 @@ Central State notifications
 
 Item mutations flow through the State API: `addReservationItem`, `updateReservationItem`, `duplicateReservationItem`, and `deleteReservationItem`. Duplicate clones all source fields with a new id and fresh timestamps and inserts directly after the source. Delete removes the item and, when the deleted item was selected, falls back to the item at the deleted position, then the previous item, then `null`.
 
-State is memory-only unless explicitly saved. Local Storage, backend synchronization, and cloud sync remain outside the current architecture scope. Save, Open, and PDF Export are available; AI Package and Settings remain planned.
+State is memory-only unless explicitly saved. Local Storage, backend synchronization, and cloud sync remain outside the current architecture scope. Save, Open, PDF Export, and AI Package export are available; Settings remains planned. AI Package downloads an AI-ready JSON document built from the full Central State snapshot, sanitized against the reservation item schema, with a derived `context` summary for machine assistance.
 
 ## Data Architecture
 

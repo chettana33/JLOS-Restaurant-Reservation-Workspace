@@ -156,3 +156,15 @@ Daily engineering journal.
 - หลัง Duplicate เลือก item ที่ซ้ำและเลื่อนไปยังตำแหน่งทันที หลัง Confirm Delete fallback selection และเลื่อนไปยัง item ใหม่
 - ทดสอบ State API 16/16 และ UI interaction 14/14 ผ่าน (headless browser) ไม่มี console error
 - ไม่มี Local Storage, Autosave, Backend, Cloud Sync, AI Package, Settings หรือ PDF ที่เปลี่ยนแปลง
+
+## 2026-08-05 — TASK-011 completed
+
+- สถานะ: **Completed**
+- เพิ่ม `js/ai-package.js` — ปุ่ม `AI Package` ใน Toolbar download โปรเจกต์เป็น AI-ready JSON (`format: jlos-ai-package`, `formatVersion: 1.0`)
+- อ่าน Project และ Reservation Items ทั้งหมดจาก Central State API และ sanitize items ผ่าน `sanitizeValue` (export จาก `js/storage.js`) ตาม schema
+- เพิ่ม derived `context` block: purpose, summary จากค่าจริง, dayGroups (เรียงตาม Timeline), totals และ statusCounts โดยไม่สร้างข้อมูลปลอม
+- ไม่รวม `selectedItemId` (เป็น transient workspace state)
+- Export `sanitizeValue` จาก `js/storage.js` เพื่อ Single Source of Truth ของ schema-based sanitization
+- เพิ่ม accessible live status แสดงชื่อไฟล์ที่ export และเปิดปุ่ม AI Package (Settings ยังคง disabled)
+- ทดสอบ State API 41/41 และ UI interaction 21/21 ผ่าน (headless browser) ไม่มี console error
+- ไม่มี Local Storage, Autosave, Backend, Cloud Sync, AI Package import, Settings หรือ PDF ที่เปลี่ยนแปลง
