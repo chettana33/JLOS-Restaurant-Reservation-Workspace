@@ -2,15 +2,26 @@
 
 Japan Land Operator Suite (JLOS) — Restaurant Reservation Workspace is a desktop-first workspace for organizing restaurant reservations across a Japan land-operation itinerary. This repository contains the v4.0 Alpha, Generation 2 codebase.
 
+## AI / Agent Handoff (อ่านก่อนทำงาน)
+
+ถ้าคุณเป็น AI, Codex หรือผู้รับช่วงงาน โปรดเริ่มจาก:
+
+1. [START_HERE.md](START_HERE.md) — จุดเริ่มต้น + Read Order
+2. [CURRENT_STATE.md](CURRENT_STATE.md) — สถานะปัจจุบัน (branch/PR/task)
+3. [checkpoints/CHECKPOINT_LATEST.md](checkpoints/CHECKPOINT_LATEST.md) — Delta checkpoint ล่าสุด
+4. [START_CHAT.md](START_CHAT.md) — ลำดับเอกสารที่ต้องอ่านก่อนพัฒนา
+
+> หลักการ: ทุกงานต้องมี spec ใน `Prompts/Sprint_XX/`, test evidence, docs update และ PR review. ห้ามแก้ baseline โดยตรง.
+
 ## Project Overview
 
 - **Version:** v4.0 Alpha
 - **Architecture:** Generation 2
-- **Current sprint:** Infrastructure
+- **Current sprint:** Sprint 6
 - **Stack:** Semantic HTML, CSS, and vanilla JavaScript
 - **Runtime:** Static browser application with no backend
 
-The workspace currently provides a Reservation Timeline, Reservation Details, and Output Preview backed by a centralized in-memory application state. Deferred capabilities are tracked in the project roadmap.
+The workspace currently provides a Reservation Timeline (create, edit, duplicate, delete), Reservation Details, Live Output Preview, Save/Load Project, and PDF Export, all backed by a centralized in-memory application state. Deferred capabilities are tracked in the project roadmap.
 
 ## Architecture
 
