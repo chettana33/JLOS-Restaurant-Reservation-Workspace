@@ -5,7 +5,7 @@
 
 import { getSelectedItem, subscribe, updateReservationItem } from "./state.js";
 
-const STATUS_OPTIONS = Object.freeze([
+export const STATUS_OPTIONS = Object.freeze([
   ["draft", "Draft"],
   ["pending", "Pending"],
   ["requested", "Requested"],
@@ -16,7 +16,7 @@ const STATUS_OPTIONS = Object.freeze([
   ["archived", "Archived"],
 ]);
 
-const MEAL_OPTIONS = Object.freeze([
+export const MEAL_OPTIONS = Object.freeze([
   ["", "Select meal"],
   ["breakfast", "Breakfast"],
   ["lunch", "Lunch"],

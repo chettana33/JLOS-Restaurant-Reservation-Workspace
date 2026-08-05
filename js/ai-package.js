@@ -6,7 +6,7 @@
  * No data is fabricated; empty or null values stay empty or null.
  */
 
-import { getState } from "./state.js";
+import { getExportFilenamePrefix, getState } from "./state.js";
 import { getSortedTimelineItems } from "./timeline.js";
 import { sanitizeValue } from "./storage.js";
 
@@ -174,8 +174,9 @@ export function createAiPackageFilename(tourCode, now = new Date()) {
     .replace(/[^a-z0-9_-]+/gi, "_")
     .replace(/^_+|_+$/g, "");
   const date = now.toISOString().slice(0, 10);
+  const prefix = getExportFilenamePrefix() || "JLOS";
 
-  return `JLOS_${safeTourCode || "Project"}_AI_${date}.json`;
+  return `${prefix}_${safeTourCode || "Project"}_AI_${date}.json`;
 }
 
 export function downloadAiPackage(documentData, filename) {

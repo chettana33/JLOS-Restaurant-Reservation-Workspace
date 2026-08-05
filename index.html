@@ -64,7 +64,7 @@
           >
           <button class="button" type="button" data-action="export-ai-package">AI Package</button>
           <button class="button button--export" type="button" data-action="export-pdf">Export PDF</button>
-          <button class="button button--icon-text" type="button" disabled title="Available in a later task">
+          <button class="button button--icon-text" type="button" data-action="open-settings">
             <span aria-hidden="true">⚙</span>
             Settings
           </button>
@@ -130,6 +130,74 @@
           <button class="button" type="button" data-action="cancel-delete">Cancel</button>
           <button class="button button--danger-quiet" type="button" data-action="confirm-delete">Delete</button>
         </div>
+      </dialog>
+
+      <dialog
+        id="settings-dialog"
+        class="confirm-dialog settings-dialog"
+        aria-labelledby="settings-dialog-title"
+      >
+        <h2 id="settings-dialog-title" class="confirm-dialog__title">Workspace Settings</h2>
+        <form id="settings-form" class="settings-form" novalidate>
+          <fieldset class="settings-group">
+            <legend>New Reservation defaults</legend>
+            <label class="settings-field">
+              <span>Meal</span>
+              <select name="newReservation-meal"></select>
+            </label>
+            <label class="settings-field">
+              <span>Status</span>
+              <select name="newReservation-status"></select>
+            </label>
+            <label class="settings-field">
+              <span>Adults</span>
+              <input type="number" name="newReservation-adults" min="0" step="1">
+            </label>
+            <label class="settings-field">
+              <span>Children</span>
+              <input type="number" name="newReservation-children" min="0" step="1">
+            </label>
+            <label class="settings-field">
+              <span>Guides</span>
+              <input type="number" name="newReservation-guides" min="0" step="1">
+            </label>
+            <label class="settings-field">
+              <span>Currency</span>
+              <input type="text" name="newReservation-currency" maxlength="3" pattern="[A-Z]{3}" title="Three-letter ISO 4217 code, e.g. JPY" autocomplete="off">
+            </label>
+          </fieldset>
+          <fieldset class="settings-group">
+            <legend>Project defaults</legend>
+            <label class="settings-field">
+              <span>Tour Code</span>
+              <input type="text" name="projectDefaults-tourCode" autocomplete="off">
+            </label>
+            <label class="settings-field">
+              <span>Customer</span>
+              <input type="text" name="projectDefaults-customer" autocomplete="off">
+            </label>
+            <label class="settings-field">
+              <span>Guide</span>
+              <input type="text" name="projectDefaults-guide" autocomplete="off">
+            </label>
+            <label class="settings-field">
+              <span>Travel Date</span>
+              <input type="text" name="projectDefaults-travelDate" autocomplete="off">
+            </label>
+          </fieldset>
+          <fieldset class="settings-group">
+            <legend>Export</legend>
+            <label class="settings-field">
+              <span>Filename prefix</span>
+              <input type="text" name="exportFilenamePrefix" autocomplete="off">
+            </label>
+          </fieldset>
+          <p id="settings-status" class="settings-form__status" role="status" aria-live="polite"></p>
+          <div class="confirm-dialog__actions">
+            <button class="button" type="button" data-action="cancel-settings">Cancel</button>
+            <button class="button button--primary" type="submit">Save</button>
+          </div>
+        </form>
       </dialog>
     </div>
     <script type="module" src="js/app.js"></script>
