@@ -104,3 +104,13 @@
 - Added accessible live feedback and focus return after file selection.
 - Preserved responsive Toolbar behavior without horizontal scrolling.
 - Added no Local Storage, autosave, backend, cloud sync, Duplicate, Delete, PDF, Settings, or AI Package behavior.
+
+### TASK-010 — Duplicate and Delete Reservation completed
+
+- Enabled Duplicate and Delete Toolbar actions, disabled when no Reservation Item is selected.
+- Added `duplicateReservationItem(id)` to clone all source fields with a new id and fresh `createdAt`/`updatedAt`, inserting directly after the source item.
+- Added `deleteReservationItem(id)` to remove the item and fall back selection to the item at the deleted position, then the previous item, then `null`.
+- Added a native modal confirmation dialog naming the selected reservation before deletion.
+- Duplicate selects the new copy and scrolls it into view; confirmed delete falls back selection and scrolls to the replacement.
+- Cancel and Escape close the dialog without changing state, and focus returns to the Delete button.
+- Added no Local Storage, autosave, backend, cloud sync, AI Package, Settings, or PDF behavior.

@@ -5,6 +5,8 @@
 
 import {
   addReservationItem,
+  deleteReservationItem,
+  duplicateReservationItem,
   getReservationItems,
   getSelectedItem,
   getSelectedItemId,
@@ -359,12 +361,28 @@ export function initializeReservationTimeline({
   container,
   countElement,
   newReservationButton,
+  duplicateButton,
+  deleteButton,
+  deleteConfirmDialog,
 }) {
+  function syncItemActionButtons() {
+    const hasSelectedItem = Boolean(getSelectedItem());
+
+    if (duplicateButton) {
+      duplicateButton.disabled = !hasSelectedItem;
+    }
+
+    if (deleteButton) {
+      deleteButton.disabled = !hasSelectedItem;
+    }
+  }
+
   function renderFromState() {
     const items = getReservationItems();
 
     renderReservationTimeline(container, items, getSelectedItemId());
     countElement.textContent = `${items.length} ${items.length === 1 ? "item" : "items"}`;
+    syncItemActionButtons();
   }
 
   function revealSelectedItem(shouldFocus = false) {
@@ -420,11 +438,61 @@ export function initializeReservationTimeline({
     }
   }
 
+  function handleDuplicate() {
+    const selectedItem = getSelectedItem();
+
+    if (!selectedItem) {
+      return;
+    }
+
+    const duplicatedItemId = duplicateReservationItem(selectedItem.id);
+
+    if (duplicatedItemId) {
+      setSelectedItemId(duplicatedItemId);
+      revealSelectedItem(true);
+    }
+  }
+
+  function handleDelete() {
+    const selectedItem = getSelectedItem();
+
+    if (!selectedItem || !deleteConfirmDialog) {
+      return;
+    }
+
+    const message = deleteConfirmDialog.querySelector("[data-delete-confirm-name]");
+
+    if (message) {
+      message.textContent = `Delete "${selectedItem.restaurantName || selectedItem.title || "Untitled Reservation"}" from the project?`;
+    }
+
+    deleteConfirmDialog.showModal();
+  }
+
+  function handleCancelDelete() {
+    deleteConfirmDialog?.close();
+    deleteButton?.focus();
+  }
+
+  function handleConfirmDelete() {
+    const selectedItem = getSelectedItem();
+
+    deleteConfirmDialog?.close();
+
+    if (selectedItem && deleteReservationItem(selectedItem.id)) {
+      revealSelectedItem(true);
+    }
+  }
+
   const unsubscribe = subscribe(renderFromState);
 
   container.addEventListener("click", handleTimelineClick);
   container.addEventListener("keydown", handleTimelineKeydown);
   newReservationButton.addEventListener("click", handleNewReservation);
+  duplicateButton?.addEventListener("click", handleDuplicate);
+  deleteButton?.addEventListener("click", handleDelete);
+  deleteConfirmDialog?.querySelector('[data-action="cancel-delete"]')?.addEventListener("click", handleCancelDelete);
+  deleteConfirmDialog?.querySelector('[data-action="confirm-delete"]')?.addEventListener("click", handleConfirmDelete);
   renderFromState();
   revealSelectedItem();
 
@@ -433,5 +501,9 @@ export function initializeReservationTimeline({
     container.removeEventListener("click", handleTimelineClick);
     container.removeEventListener("keydown", handleTimelineKeydown);
     newReservationButton.removeEventListener("click", handleNewReservation);
+    duplicateButton?.removeEventListener("click", handleDuplicate);
+    deleteButton?.removeEventListener("click", handleDelete);
+    deleteConfirmDialog?.querySelector('[data-action="cancel-delete"]')?.removeEventListener("click", handleCancelDelete);
+    deleteConfirmDialog?.querySelector('[data-action="confirm-delete"]')?.removeEventListener("click", handleConfirmDelete);
   };
 }

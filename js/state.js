@@ -206,6 +206,56 @@ export function updateReservationItem(id, changes) {
   return true;
 }
 
+export function duplicateReservationItem(id) {
+  const itemIndex = state.reservationItems.findIndex((item) => item.id === id);
+
+  if (itemIndex < 0) {
+    console.warn(`Cannot duplicate Reservation Item "${id}" because it does not exist.`);
+    return null;
+  }
+
+  if (!isValidItem(state.reservationItems[itemIndex])) {
+    console.warn(`Cannot duplicate Reservation Item "${id}" because it is malformed.`);
+    return null;
+  }
+
+  const timestamp = new Date().toISOString();
+  const duplicateItem = {
+    ...clone(state.reservationItems[itemIndex]),
+    id: crypto.randomUUID(),
+    createdAt: timestamp,
+    updatedAt: timestamp,
+  };
+
+  state.reservationItems.splice(itemIndex + 1, 0, duplicateItem);
+  notifySubscribers();
+  return duplicateItem.id;
+}
+
+export function deleteReservationItem(id) {
+  const itemIndex = state.reservationItems.findIndex((item) => item.id === id);
+
+  if (itemIndex < 0) {
+    console.warn(`Cannot delete Reservation Item "${id}" because it does not exist.`);
+    return false;
+  }
+
+  const wasSelected = state.selectedItemId === id;
+
+  state.reservationItems.splice(itemIndex, 1);
+
+  if (wasSelected) {
+    const replacement =
+      state.reservationItems[itemIndex]?.id ??
+      state.reservationItems[itemIndex - 1]?.id ??
+      null;
+    state.selectedItemId = replacement;
+  }
+
+  notifySubscribers();
+  return true;
+}
+
 export function subscribe(listener) {
   if (typeof listener !== "function") {
     throw new TypeError("State subscriber must be a function.");

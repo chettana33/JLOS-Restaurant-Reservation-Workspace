@@ -77,6 +77,16 @@ Displays workspace actions. TASK-003 does not add action behavior.
 - Replacement API: `replaceState(nextState)` performs one atomic state replacement and subscriber notification
 - Does not provide: Local Storage, backend sync, delete, duplicate, PDF, or AI Package export
 
+### Item Actions (Duplicate / Delete)
+
+- Module: `js/timeline.js` + native `<dialog>` in `index.html`
+- Status: Implemented in TASK-010
+- Duplicate clones the selected Reservation Item through `duplicateReservationItem(id)` and selects the copy.
+- Delete opens a native modal confirmation dialog naming the selected reservation, then removes it through `deleteReservationItem(id)`.
+- Duplicate and Delete Toolbar buttons are disabled whenever no Reservation Item is selected.
+- On confirmed delete, selection falls back to the item at the deleted position, then the previous item, then `null`.
+- Dialog supports Escape, focus return, and a destructive Confirm action; Cancel and Escape never change state.
+
 ### Project File Controls
 
 - Module: `js/storage.js`

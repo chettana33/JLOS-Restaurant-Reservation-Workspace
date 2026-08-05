@@ -39,7 +39,9 @@ Central State notifications
 
 `js/state.js` is the single source of truth for project data, Reservation Items, and selection. `selectedItem` is derived from `selectedItemId` and `reservationItems`; it is never stored as duplicated state. Components subscribe to state notifications and pull their own current view data. Timeline does not call Reservation Details or Output Preview directly.
 
-State is memory-only in TASK-005. Local Storage, backend synchronization, save, import, and export remain outside the current architecture scope.
+Item mutations flow through the State API: `addReservationItem`, `updateReservationItem`, `duplicateReservationItem`, and `deleteReservationItem`. Duplicate clones all source fields with a new id and fresh timestamps and inserts directly after the source. Delete removes the item and, when the deleted item was selected, falls back to the item at the deleted position, then the previous item, then `null`.
+
+State is memory-only unless explicitly saved. Local Storage, backend synchronization, and cloud sync remain outside the current architecture scope. Save, Open, and PDF Export are available; AI Package and Settings remain planned.
 
 ## Data Architecture
 

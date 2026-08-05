@@ -65,3 +65,14 @@ Major architecture and product decisions are recorded here. New decisions must p
 - State getters return cloned snapshots to prevent external mutation.
 - Duplicate IDs and malformed initial items are ignored with focused warnings.
 - Local Storage, backend persistence, and two-way form binding are not introduced by this decision.
+
+## DEC-007 — Duplicate and Delete use the Central State mutation API
+
+- Date: 2026-08-05
+- Status: Accepted
+- Sprint: Sprint 6
+- Decision: Reservation Item Duplicate and Delete are implemented as `duplicateReservationItem(id)` and `deleteReservationItem(id)` in `js/state.js`. Both perform one atomic mutation and one subscriber notification.
+- Duplicate contract: Clone every field of the source item, replace `id` with a new UUID, reset `createdAt` and `updatedAt` to the current timestamp, and insert directly after the source item.
+- Delete contract: Remove the item; when the deleted item was selected, fall back to the item at the deleted position, then the previous item, then `null`.
+- UI: Duplicate and Delete Toolbar actions are enabled only when a Reservation Item is selected. Delete requires confirmation through a native modal `<dialog>` before state changes.
+- Reason: Preserve the Single Source of Truth and prevent duplicated selection/data state across modules.
