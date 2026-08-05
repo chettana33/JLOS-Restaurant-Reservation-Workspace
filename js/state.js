@@ -11,16 +11,97 @@ const DEFAULT_PROJECT = Object.freeze({
   projectStatus: "working",
 });
 
+const DEFAULT_SETTINGS = Object.freeze({
+  newReservation: Object.freeze({
+    meal: "dinner",
+    status: "pending",
+    adults: 2,
+    children: 0,
+    guides: 0,
+    currency: "JPY",
+  }),
+  projectDefaults: Object.freeze({
+    tourCode: "",
+    customer: "",
+    guide: "",
+    travelDate: "",
+  }),
+  exportFilenamePrefix: "JLOS",
+});
+
 const state = {
   project: { ...DEFAULT_PROJECT },
   reservationItems: [],
   selectedItemId: null,
+  settings: { ...cloneDefaultSettings() },
 };
 
 const subscribers = new Set();
 
 function clone(value) {
   return structuredClone(value);
+}
+
+function cloneDefaultSettings() {
+  return {
+    newReservation: { ...DEFAULT_SETTINGS.newReservation },
+    projectDefaults: { ...DEFAULT_SETTINGS.projectDefaults },
+    exportFilenamePrefix: DEFAULT_SETTINGS.exportFilenamePrefix,
+  };
+}
+
+function isPlainObject(value) {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function normalizeSettings(settings) {
+  if (!isPlainObject(settings)) {
+    return cloneDefaultSettings();
+  }
+
+  const normalized = cloneDefaultSettings();
+  const newReservation = isPlainObject(settings.newReservation)
+    ? settings.newReservation
+    : {};
+  const projectDefaults = isPlainObject(settings.projectDefaults)
+    ? settings.projectDefaults
+    : {};
+
+  if (typeof newReservation.meal === "string" && newReservation.meal) {
+    normalized.newReservation.meal = newReservation.meal;
+  }
+
+  if (typeof newReservation.status === "string" && newReservation.status) {
+    normalized.newReservation.status = newReservation.status;
+  }
+
+  if (Number.isInteger(newReservation.adults) && newReservation.adults >= 0) {
+    normalized.newReservation.adults = newReservation.adults;
+  }
+
+  if (Number.isInteger(newReservation.children) && newReservation.children >= 0) {
+    normalized.newReservation.children = newReservation.children;
+  }
+
+  if (Number.isInteger(newReservation.guides) && newReservation.guides >= 0) {
+    normalized.newReservation.guides = newReservation.guides;
+  }
+
+  if (typeof newReservation.currency === "string" && /^[A-Z]{3}$/.test(newReservation.currency)) {
+    normalized.newReservation.currency = newReservation.currency;
+  }
+
+  ["tourCode", "customer", "guide", "travelDate"].forEach((key) => {
+    if (typeof projectDefaults[key] === "string") {
+      normalized.projectDefaults[key] = projectDefaults[key];
+    }
+  });
+
+  if (typeof settings.exportFilenamePrefix === "string" && settings.exportFilenamePrefix.trim()) {
+    normalized.exportFilenamePrefix = settings.exportFilenamePrefix.trim();
+  }
+
+  return normalized;
 }
 
 function isValidItem(item) {
@@ -75,7 +156,7 @@ function prepareReplacementItems(items) {
   });
 }
 
-export function initializeState(projectData = {}, reservationItems = []) {
+export function initializeState(projectData = {}, reservationItems = [], settings) {
   const safeProjectData = projectData && typeof projectData === "object" ? projectData : {};
 
   state.project = {
@@ -84,6 +165,7 @@ export function initializeState(projectData = {}, reservationItems = []) {
   };
   state.reservationItems = prepareReservationItems(reservationItems);
   state.selectedItemId = state.reservationItems[0]?.id ?? null;
+  state.settings = normalizeSettings(settings);
   notifySubscribers();
 }
 
@@ -92,6 +174,7 @@ export function getState() {
     project: getProject(),
     reservationItems: getReservationItems(),
     selectedItemId: getSelectedItemId(),
+    settings: getSettings(),
   };
 }
 
@@ -110,6 +193,77 @@ export function getSelectedItemId() {
 export function getSelectedItem() {
   const selectedItem = state.reservationItems.find((item) => item.id === state.selectedItemId);
   return selectedItem ? clone(selectedItem) : null;
+}
+
+export function getSettings() {
+  return clone(state.settings);
+}
+
+export function getNewReservationDefaults() {
+  return clone(state.settings.newReservation);
+}
+
+export function getProjectDefaults() {
+  return clone(state.settings.projectDefaults);
+}
+
+export function getExportFilenamePrefix() {
+  return state.settings.exportFilenamePrefix;
+}
+
+/**
+ * Merges only recognized settings keys into the persisted settings state.
+ * Returns true on success, false when the partial is malformed.
+ */
+export function updateSettings(partialSettings) {
+  if (!partialSettings || typeof partialSettings !== "object" || Array.isArray(partialSettings)) {
+    console.warn("Cannot update settings with malformed partial.");
+    return false;
+  }
+
+  const nextSettings = clone(state.settings);
+  let changed = false;
+
+  if (isPlainObject(partialSettings.newReservation)) {
+    const nextNewReservation = { ...nextSettings.newReservation, ...clone(partialSettings.newReservation) };
+    const normalizedNewReservation = normalizeSettings({ newReservation: nextNewReservation }).newReservation;
+    if (JSON.stringify(nextNewReservation) !== JSON.stringify(normalizedNewReservation)) {
+      console.warn("Settings newReservation contained unrecognized or malformed keys; ignored.");
+    }
+    nextSettings.newReservation = normalizedNewReservation;
+    changed = true;
+  }
+
+  if (isPlainObject(partialSettings.projectDefaults)) {
+    const nextProjectDefaults = { ...nextSettings.projectDefaults, ...clone(partialSettings.projectDefaults) };
+    const normalizedProjectDefaults = normalizeSettings({ projectDefaults: nextProjectDefaults }).projectDefaults;
+    if (JSON.stringify(nextProjectDefaults) !== JSON.stringify(normalizedProjectDefaults)) {
+      console.warn("Settings projectDefaults contained unrecognized or malformed keys; ignored.");
+    }
+    nextSettings.projectDefaults = normalizedProjectDefaults;
+    changed = true;
+  }
+
+  if (partialSettings.exportFilenamePrefix !== undefined) {
+    const normalized = normalizeSettings({ exportFilenamePrefix: partialSettings.exportFilenamePrefix });
+    if (normalized.exportFilenamePrefix !== partialSettings.exportFilenamePrefix) {
+      console.warn("Settings exportFilenamePrefix was invalid and reverted to default.");
+    }
+    nextSettings.exportFilenamePrefix = normalized.exportFilenamePrefix;
+    changed = true;
+  }
+
+  if (changed) {
+    state.settings = normalizeSettings(nextSettings);
+    notifySubscribers();
+  }
+
+  return changed;
+}
+
+export function resetSettings() {
+  state.settings = cloneDefaultSettings();
+  notifySubscribers();
 }
 
 /**
@@ -138,6 +292,7 @@ export function replaceState(nextState) {
   state.project = nextProject;
   state.reservationItems = nextItems;
   state.selectedItemId = nextSelectedItemId;
+  state.settings = normalizeSettings(nextState.settings);
   notifySubscribers();
 
   return nextSelectedItemId;

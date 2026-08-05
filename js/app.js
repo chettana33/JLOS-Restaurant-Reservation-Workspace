@@ -7,16 +7,9 @@ import { initializeOutputPreview } from "./preview.js";
 import { initializePdfExport } from "./pdf-export.js";
 import { initializeProjectFileControls } from "./storage.js";
 import { initializeAiPackageExport } from "./ai-package.js";
-import { getProject, initializeState, subscribe } from "./state.js";
+import { initializeSettings } from "./settings.js";
+import { getProject, getProjectDefaults, initializeState, subscribe } from "./state.js";
 import { initializeReservationTimeline, validateTimelineData } from "./timeline.js";
-
-const INITIAL_PROJECT = Object.freeze({
-  tourCode: "JPN-2607-018",
-  customer: "Siam Horizon Travel",
-  guide: "Ms. Aiko Tanaka",
-  travelDate: "18–24 Jul 2026",
-  projectStatus: "working",
-});
 
 const PROJECT_STATUS_LABELS = Object.freeze({
   draft: "Draft",
@@ -74,8 +67,9 @@ function initializeProjectSummary(container) {
 
 async function startApplication() {
   const { reservationItems, reservationItemSchema } = await loadInitialData();
+  const initialProject = { ...getProjectDefaults(), projectStatus: "working" };
 
-  initializeState(INITIAL_PROJECT, reservationItems);
+  initializeState(initialProject, reservationItems);
   initializeProjectSummary(document.querySelector("[data-project-summary]"));
   initializeReservationTimeline({
     container: document.querySelector("#reservation-timeline"),
@@ -101,6 +95,12 @@ async function startApplication() {
   initializeAiPackageExport({
     button: document.querySelector('[data-action="export-ai-package"]'),
     reservationItemSchema,
+  });
+  initializeSettings({
+    button: document.querySelector('[data-action="open-settings"]'),
+    dialog: document.querySelector("#settings-dialog"),
+    form: document.querySelector("#settings-form"),
+    statusElement: document.querySelector("#settings-status"),
   });
 }
 

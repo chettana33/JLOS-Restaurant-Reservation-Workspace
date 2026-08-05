@@ -7,6 +7,8 @@
  * single-page A4 landscape PDF, and downloads it with the required filename.
  */
 
+import { getExportFilenamePrefix } from "./state.js";
+
 const A4_LANDSCAPE_MM = Object.freeze({
   width: 297,
   height: 210,
@@ -25,8 +27,9 @@ function createExportFilename(now = new Date()) {
   const day = pad(now.getDate());
   const hours = pad(now.getHours());
   const minutes = pad(now.getMinutes());
+  const prefix = getExportFilenamePrefix() || "Quotation";
 
-  return `Quotation-${year}${month}${day}-${hours}${minutes}.pdf`;
+  return `${prefix}-${year}${month}${day}-${hours}${minutes}.pdf`;
 }
 
 function escapePdfString(value) {

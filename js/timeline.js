@@ -7,6 +7,7 @@ import {
   addReservationItem,
   deleteReservationItem,
   duplicateReservationItem,
+  getNewReservationDefaults,
   getReservationItems,
   getSelectedItem,
   getSelectedItemId,
@@ -326,28 +327,29 @@ export function renderTimelineError(container, message) {
 
 export function createBlankReservationItem(referenceItem) {
   const timestamp = new Date().toISOString();
+  const defaults = getNewReservationDefaults();
 
   return {
     id: crypto.randomUUID(),
     dayNumber: Number.isInteger(referenceItem?.dayNumber) ? referenceItem.dayNumber : null,
     date: referenceItem?.date ?? "",
     itemType: "restaurant",
-    meal: "",
+    meal: defaults.meal,
     time: "",
     title: "",
-    status: "pending",
+    status: defaults.status,
     confirmationNumber: "",
     restaurantName: "",
     phone: null,
     contact: null,
     locationLink: "",
-    adults: 0,
-    children: 0,
-    guides: 0,
+    adults: defaults.adults,
+    children: defaults.children,
+    guides: defaults.guides,
     menu: {
       name: null,
       pricePerGuest: null,
-      currency: null,
+      currency: defaults.currency,
       items: [],
     },
     notes: "",

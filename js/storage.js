@@ -3,7 +3,7 @@
  * This module does not use Local Storage or keep a second state copy.
  */
 
-import { getState, replaceState } from "./state.js";
+import { getState, getExportFilenamePrefix, replaceState } from "./state.js";
 
 export const PROJECT_FILE_VERSION = "4.0-alpha";
 
@@ -13,6 +13,7 @@ const TOP_LEVEL_KEYS = Object.freeze([
   "project",
   "reservationItems",
   "selectedItemId",
+  "settings",
 ]);
 const PROJECT_KEYS = Object.freeze([
   "tourCode",
@@ -158,6 +159,7 @@ export function validateProjectDocument(documentData, reservationItemSchema) {
   validateExactKeys(documentData, TOP_LEVEL_KEYS, "projectFile", errors);
 
   TOP_LEVEL_KEYS.forEach((key) => {
+    if (key === "settings") return;
     if (!Object.hasOwn(documentData, key)) errors.push(`projectFile.${key} is required.`);
   });
 
@@ -206,6 +208,8 @@ export function validateProjectDocument(documentData, reservationItemSchema) {
       ? documentData.selectedItemId
       : null;
 
+  const settings = normalizeSettings(documentData.settings);
+
   if (errors.length > 0) {
     throw new ProjectFileError(`Invalid project file: ${errors[0]}`);
   }
@@ -220,6 +224,7 @@ export function validateProjectDocument(documentData, reservationItemSchema) {
     project: structuredClone(documentData.project),
     reservationItems: structuredClone(documentData.reservationItems),
     selectedItemId,
+    settings,
   };
 }
 
@@ -238,6 +243,62 @@ export function parseProjectDocument(text, reservationItemSchema) {
 export function restoreProjectText(text, reservationItemSchema) {
   const nextState = parseProjectDocument(text, reservationItemSchema);
   return replaceState(nextState);
+}
+
+function normalizeSettings(settings) {
+  if (!isPlainObject(settings)) {
+    return null;
+  }
+
+  const normalized = {};
+  const newReservation = isPlainObject(settings.newReservation) ? settings.newReservation : {};
+  const projectDefaults = isPlainObject(settings.projectDefaults) ? settings.projectDefaults : {};
+  const recognizedProjectDefaultsKeys = ["tourCode", "customer", "guide", "travelDate"];
+  let hasContent = false;
+
+  const meal = Object.hasOwn(newReservation, "meal") ? newReservation.meal : undefined;
+  if (typeof meal === "string" && meal.trim()) {
+    normalized.newReservation = { ...(normalized.newReservation ?? {}), meal: meal.trim() };
+    hasContent = true;
+  }
+
+  const status = Object.hasOwn(newReservation, "status") ? newReservation.status : undefined;
+  if (typeof status === "string" && status.trim()) {
+    normalized.newReservation = { ...(normalized.newReservation ?? {}), status: status.trim() };
+    hasContent = true;
+  }
+
+  ["adults", "children", "guides"].forEach((key) => {
+    const value = Object.hasOwn(newReservation, key) ? newReservation[key] : undefined;
+    if (Number.isInteger(value) && value >= 0) {
+      normalized.newReservation = { ...(normalized.newReservation ?? {}), [key]: value };
+      hasContent = true;
+    }
+  });
+
+  const currency = Object.hasOwn(newReservation, "currency") ? newReservation.currency : undefined;
+  if (typeof currency === "string" && /^[A-Z]{3}$/.test(currency)) {
+    normalized.newReservation = { ...(normalized.newReservation ?? {}), currency };
+    hasContent = true;
+  }
+
+  recognizedProjectDefaultsKeys.forEach((key) => {
+    const value = Object.hasOwn(projectDefaults, key) ? projectDefaults[key] : undefined;
+    if (typeof value === "string") {
+      normalized.projectDefaults = { ...(normalized.projectDefaults ?? {}), [key]: value };
+      hasContent = true;
+    }
+  });
+
+  const exportFilenamePrefix = Object.hasOwn(settings, "exportFilenamePrefix")
+    ? settings.exportFilenamePrefix
+    : undefined;
+  if (typeof exportFilenamePrefix === "string" && exportFilenamePrefix.trim()) {
+    normalized.exportFilenamePrefix = exportFilenamePrefix.trim();
+    hasContent = true;
+  }
+
+  return hasContent ? normalized : null;
 }
 
 export function sanitizeValue(value, schema) {
@@ -271,6 +332,7 @@ export function createProjectDocument(stateSnapshot, reservationItemSchema, now 
       ? stateSnapshot.reservationItems.map((item) => sanitizeValue(item, reservationItemSchema))
       : [],
     selectedItemId: stateSnapshot.selectedItemId ?? null,
+    settings: normalizeSettings(stateSnapshot.settings) ?? undefined,
   };
 
   validateProjectDocument(documentData, reservationItemSchema);
@@ -283,8 +345,9 @@ export function createProjectFilename(tourCode, now = new Date()) {
     .replace(/[^a-z0-9_-]+/gi, "_")
     .replace(/^_+|_+$/g, "");
   const date = now.toISOString().slice(0, 10);
+  const prefix = getExportFilenamePrefix() || "JLOS";
 
-  return `JLOS_${safeTourCode || "Project"}_${date}.json`;
+  return `${prefix}_${safeTourCode || "Project"}_${date}.json`;
 }
 
 export function downloadProjectDocument(documentData, filename) {
