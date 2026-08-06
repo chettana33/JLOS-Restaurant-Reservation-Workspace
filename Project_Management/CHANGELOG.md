@@ -124,3 +124,15 @@
 - Excluded `selectedItemId` from the package as transient workspace state.
 - Added accessible live status feedback announcing the exported filename.
 - Kept Settings disabled; added no Local Storage, autosave, backend, cloud sync, AI Package import, or PDF behavior.
+
+### TASK-012 — Workspace Settings completed
+
+- Enabled the Settings Toolbar action with an accessible native modal `<dialog>`.
+- Added `js/settings.js` to read and write settings through the Central State API.
+- Added a `settings` object to Central State (`js/state.js`) with `newReservation` defaults (meal, status, adults, children, guides, currency), `projectDefaults`, and `exportFilenamePrefix`; normalized through `normalizeSettings`.
+- Added `getSettings`, `getNewReservationDefaults`, `getProjectDefaults`, `getExportFilenamePrefix`, `updateSettings`, and `resetSettings`; `initializeState` and `replaceState` now normalize settings.
+- New Reservation now seeds blank items from `newReservation` defaults instead of hardcoded values.
+- Application startup seeds the initial Project from `projectDefaults` instead of a hardcoded initial project.
+- Project Save (`createProjectFilename`), AI Package (`createAiPackageFilename`), and PDF Export (`createExportFilename`) use the configured `exportFilenamePrefix` with fallback to their previous defaults.
+- Saved project files now include a validated `settings` block; legacy files without it still load, and malformed settings fall back to defaults without rejecting the file.
+- Added no Local Storage, autosave, backend, cloud sync, or language/locale switching.

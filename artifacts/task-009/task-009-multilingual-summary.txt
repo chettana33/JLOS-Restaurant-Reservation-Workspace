@@ -1,0 +1,6 @@
+PASS: Timeline initial item count ? 5
+PASS: Timeline selection updates preview
+PASS: New Reservation adds item ? 5 -> 6
+PASS: Multilingual restaurant name appears in preview
+PASS: Multilingual notes appear in preview
+PASS: Multilingual PDF filename/download ? multilingual-Quotation-20260719-1332.pdf

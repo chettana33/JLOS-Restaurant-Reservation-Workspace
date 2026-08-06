@@ -1,0 +1,16 @@
+WARN: Browser console error ? Failed to load resource: the server responded with a status of 404 (File not found)
+WARN: Browser console error ? Failed to load resource: net::ERR_NAME_NOT_RESOLVED
+PASS: Dashboard/header visible
+PASS: Reservation Timeline loaded
+PASS: Reservation Editor visible
+PASS: Live Output Preview rendered
+PASS: New Reservation action enabled
+PASS: Export PDF button enabled
+PASS: Export progress/disabled during generation ? aria-busy=true; disabled=true
+PASS: PDF filename format ? Quotation-20260719-1330.pdf
+PASS: PDF generated with printable content ? 141166 bytes
+PASS: Downloaded file is PDF ? %PDF-
+PASS: Export button restored after generation
+PASS: Export success status shown ? Exported Quotation-20260719-1330.pdf
+KNOWN: Save Project existing state ? disabled=true
+KNOWN: Load Project existing state ? load buttons=0

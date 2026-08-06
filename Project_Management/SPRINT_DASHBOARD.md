@@ -29,18 +29,19 @@ chettana33/JLOS-Restaurant-Reservation-Workspace
 - TASK-009 Export PDF
 - TASK-010 Duplicate and Delete Reservation
 - TASK-011 AI Package Export
+- TASK-012 Settings
 
 ## Next
 
-- TASK-012 Settings
+- (none — Sprint 6 complete)
 
 ## Current Progress
 
-90%
+100%
 
 ## Current Branch
 
-feature/task-011
+feature/task-012
 
 ## Status
 

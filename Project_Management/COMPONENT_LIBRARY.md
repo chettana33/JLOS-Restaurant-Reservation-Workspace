@@ -108,6 +108,18 @@ Displays workspace actions. TASK-003 does not add action behavior.
 - Excludes `selectedItemId` as transient workspace state and fabricates no data
 - Announces the exported filename through an accessible live status message
 
+### Workspace Settings
+
+- Module: `js/settings.js`
+- Status: Implemented in TASK-012
+- Enables: `Settings` Toolbar action
+- Opens a native modal `<dialog>` editing the Central State `settings` object
+- Fields: New Reservation defaults (meal, status, adults, children, guides, currency), Project defaults (tour code, customer, guide, travel date), and export filename prefix
+- Reads and writes settings only through `getSettings` / `updateSettings`; never mutates Reservation Items
+- Save persists to state and closes; Cancel and Escape close without changing state; focus returns to the Settings button
+- Announces Save results through an accessible live status message
+- Settings are normalized (invalid values fall back to defaults) and persisted with the saved project file
+
 ## Component Rules
 
 - Keep reusable presentation components in `components/` when implementation begins.

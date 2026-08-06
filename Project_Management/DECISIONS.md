@@ -85,3 +85,14 @@ Major architecture and product decisions are recorded here. New decisions must p
 - Decision: The `AI Package` Toolbar action downloads the current project as an AI-ready JSON document (`js/ai-package.js`). The document carries real project data and the full sanitized Reservation Item collection read from the Central State API, plus a derived `context` block (purpose, summary, day groups, totals, status counts) for machine-assisted work.
 - Contract: Format `jlos-ai-package`, format version `1.0`; items are sanitized against `data/reservation-item.schema.json` using the shared `sanitizeValue`; `selectedItemId` is intentionally excluded as transient workspace state; no data is fabricated.
 - Reason: Give AI and Codex agents a faithful, schema-consistent snapshot of the current project while keeping a single source of truth for the data itself.
+
+## DEC-009 — Workspace Settings live in Central State and persist with the project file
+
+- Date: 2026-08-05
+- Status: Accepted
+- Sprint: Sprint 6
+- Decision: The `Settings` Toolbar action opens a native modal `<dialog>` (`js/settings.js`) that edits a `settings` object in Central State (`js/state.js`). Settings hold `newReservation` defaults (meal, status, adults, children, guides, currency), `projectDefaults`, and an `exportFilenamePrefix`.
+- Contract: All settings are normalized through a single `normalizeSettings`; unrecognized or malformed values fall back to approved defaults. New Reservation items seed blank items from `newReservation` defaults; application startup seeds the initial Project from `projectDefaults`; Project Save, AI Package, and PDF Export filenames use `exportFilenamePrefix` with fallback to their previous defaults.
+- Persistence: Saved project files include a validated `settings` block. Legacy files without settings still load, and malformed settings fall back to defaults without rejecting the file.
+- Reason: Operators configure workspace defaults once, and those defaults follow the project file so the workspace opens the way the operator left it. Settings never mutate existing Reservation Items.
+

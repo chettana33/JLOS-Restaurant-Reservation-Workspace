@@ -28,20 +28,27 @@ Application Startup
 └── Central State (js/state.js)
     ├── project
     ├── reservationItems
-    └── selectedItemId
-        └── derived selectedItem
+    ├── selectedItemId
+    │   └── derived selectedItem
+    └── settings
+        ├── newReservation defaults
+        ├── projectDefaults
+        └── exportFilenamePrefix
 
 Central State notifications
 ├── Reservation Timeline subscriber
 ├── Reservation Details subscriber
-└── Output Preview subscriber
+├── Output Preview subscriber
+└── (Settings reads/writes state on demand)
 ```
 
-`js/state.js` is the single source of truth for project data, Reservation Items, and selection. `selectedItem` is derived from `selectedItemId` and `reservationItems`; it is never stored as duplicated state. Components subscribe to state notifications and pull their own current view data. Timeline does not call Reservation Details or Output Preview directly.
+`js/state.js` is the single source of truth for project data, Reservation Items, selection, and workspace settings. `selectedItem` is derived from `selectedItemId` and `reservationItems`; it is never stored as duplicated state. Components subscribe to state notifications and pull their own current view data. Timeline does not call Reservation Details or Output Preview directly.
 
 Item mutations flow through the State API: `addReservationItem`, `updateReservationItem`, `duplicateReservationItem`, and `deleteReservationItem`. Duplicate clones all source fields with a new id and fresh timestamps and inserts directly after the source. Delete removes the item and, when the deleted item was selected, falls back to the item at the deleted position, then the previous item, then `null`.
 
-State is memory-only unless explicitly saved. Local Storage, backend synchronization, and cloud sync remain outside the current architecture scope. Save, Open, PDF Export, and AI Package export are available; Settings remains planned. AI Package downloads an AI-ready JSON document built from the full Central State snapshot, sanitized against the reservation item schema, with a derived `context` summary for machine assistance.
+Settings live in Central State and are normalized through a single `normalizeSettings`: `newReservation` defaults seed blank Reservation Items, `projectDefaults` seed the initial Project at startup, and `exportFilenamePrefix` prefixes Project Save, AI Package, and PDF Export filenames. Settings never mutate existing Reservation Items and persist inside the saved project file.
+
+State is memory-only unless explicitly saved. Local Storage, backend synchronization, and cloud sync remain outside the current architecture scope. Save, Open, PDF Export, AI Package export, and Settings are available. AI Package downloads an AI-ready JSON document built from the full Central State snapshot, sanitized against the reservation item schema, with a derived `context` summary for machine assistance.
 
 ## Data Architecture
 

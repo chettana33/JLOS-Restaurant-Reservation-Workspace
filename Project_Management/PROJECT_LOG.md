@@ -168,3 +168,16 @@ Daily engineering journal.
 - เพิ่ม accessible live status แสดงชื่อไฟล์ที่ export และเปิดปุ่ม AI Package (Settings ยังคง disabled)
 - ทดสอบ State API 41/41 และ UI interaction 21/21 ผ่าน (headless browser) ไม่มี console error
 - ไม่มี Local Storage, Autosave, Backend, Cloud Sync, AI Package import, Settings หรือ PDF ที่เปลี่ยนแปลง
+
+## 2026-08-05 — TASK-012 completed
+
+- สถานะ: **Completed**
+- เปิดปุ่ม `Settings` ใน Toolbar — native modal `<dialog>` (`js/settings.js`) แก้ไขผ่าน Central State API เท่านั้น
+- เพิ่ม `settings` object ใน `js/state.js` (`normalizeSettings` เป็นจุดเดียว): `newReservation` defaults (meal, status, adults, children, guides, currency), `projectDefaults`, `exportFilenamePrefix`
+- เพิ่ม `getSettings`, `getNewReservationDefaults`, `getProjectDefaults`, `getExportFilenamePrefix`, `updateSettings`, `resetSettings`; `initializeState` และ `replaceState` normalize settings
+- New Reservation seed ข้อมูล blank จาก `newReservation` defaults แทน hardcoded; startup seed โปรเจกต์เริ่มต้นจาก `projectDefaults` แทน INITAL_PROJECT
+- ชื่อไฟล์ Project Save / AI Package / PDF Export ใช้ `exportFilenamePrefix` (fallback เป็นค่าเดิมเมื่อ invalid)
+- ไฟล์โปรเจกต์ที่บันทึกมี `settings` ที่ validate แล้ว; ไฟล์เก่าที่ไม่มี settings ยังโหลดได้, settings ที่ผิดรูป fallback เป็น defaults โดยไม่ reject ไฟล์
+- PR #8 (AI Package) ถูกรวมเข้า develop ก่อน แล้ว rebase `feature/task-012` ต่อ develop ใหม่
+- ทดสอบ State API settings 30/30, integration 17/17, storage round-trip 15/15 และ UI interaction 18/18 ผ่าน (headless browser) ไม่มี console error
+- ไม่มี Local Storage, Autosave, Backend, Cloud Sync, หรือ Language/Locale switching

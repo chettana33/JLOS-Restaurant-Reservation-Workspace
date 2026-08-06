@@ -78,6 +78,16 @@
 - Data source: Central State API (`getState()`); items sanitized via shared `sanitizeValue`
 - Excludes: `selectedItemId` (transient), no Local Storage or backend
 
+## Workspace Settings
+
+- Settings module: `js/settings.js`
+- Full task specification: `Prompts/Sprint_06/TASK-012.md`
+- Architecture decision: `Project_Management/DECISIONS.md` — DEC-009
+- State: `settings` in `js/state.js` via `getSettings` / `updateSettings`
+- Defaults: `newReservation` (meal, status, adults, children, guides, currency), `projectDefaults`, `exportFilenamePrefix`
+- Effects: seeds New Reservation items and initial Project; prefixes Project Save, AI Package, and PDF Export filenames
+- Persistence: saved with the project file; legacy files without settings still load
+
 ## Current Scope
 
 - Current item type: `restaurant`
@@ -89,4 +99,5 @@
 - TASK-009 implements client-side PDF export of the live Output Preview.
 - TASK-010 implements Duplicate and Delete Reservation actions with a confirmation dialog.
 - TASK-011 implements AI Package export as an AI-ready JSON document.
-- Local Storage, autosave, Settings, image persistence, backend, and cloud sync remain out of scope.
+- TASK-012 implements Workspace Settings with project-file persistence.
+- Local Storage, autosave, image persistence, backend, and cloud sync remain out of scope.
